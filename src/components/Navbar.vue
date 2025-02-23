@@ -2,21 +2,23 @@
     <div
       class="items-center flex fixed left-0 right-0 p-4 bg-slate-950 items-center text-slate-200"
     >
-      <a href="/">
+      <nuxt-link to="/" class = "cursor-pointer">
         <span class="flex items-center space-x-3">
           <img src="../assets/images/logos-formal-seal.webp" class="w-10 bg-white rounded-full" />
           <div class="flex flex-col">
-            <div class="text-xl font-bold text-slate-100">Tortuga</div>
+            <div class="text-xl font-bold text-slate-100">Tortuga <span class = 'text-sm text-red-400'>v0.0.1</span></div>
             <div class="text-sm text-slate-100">
               <font-awesome-icon :icon="['fas', 'location-dot']" /> University of
               Maryland - College Park
             </div>
           </div>
         </span>
-      </a>
+      </nuxt-link>
       <input
         class="bg-white ml-auto p-2 rounded font-bold text-slate-800 outline-none"
         placeholder="Search..."
+        v-model = "this.terms"
+        @keyup.enter = "redirect"
         type="text"
       />
     </div>

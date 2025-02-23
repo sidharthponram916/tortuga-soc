@@ -12,6 +12,7 @@
   "dependencies": {
     "@fortawesome/vue-fontawesome": "^3.0.8",
     "@tailwindcss/postcss": "^4.0.8",
+    "axios": "^1.7.9",
     "nuxt": "^3.15.4",
     "postcss": "^8.5.3",
     "tailwindcss": "^4.0.8",
