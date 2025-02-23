@@ -17,17 +17,13 @@ import Footer from "@/components/Footer.vue";
 useHead({
   title: "Tortuga SOC",
   meta: [
-    {
-      property: "og:description",
-      content: "Schedule of Classes, Redefined.",
-    },
-    { property: "og:url", content: "https://tortuga-soc.vercel.app" },
-    { property: "og:image", content: "/assets/images/preview.png" },
-    { name: "theme-color", content: "#FF0000" },
-    { name: "twitter:card", content: "summary_large_image" },
-    { name: "twitter:title", content: "Tortuga" },
-    { name: "twitter:description", content: "Get more out of UMD's Schedule of Classes." },
-    { name: "twitter:image", content: "/assets/images/preview.png" },
+    { property: "og:title", content: "Tortuga" },
+    { proprty: "og:description", content: "Make the most out of the Schedule of Classes."}
+    { property: "og:type", content: "website" },
+    { property: "og:url", content: "https://tortuga-soc.vercel.app/" },
+    { property: "og:image", content: "https://tortuga-soc.vercel.app/assets/images/preview.png" },
+    { property: "og:image:type", content: "image/png" },
+    { property: "og:image:alt", content: "Tortuga" },
   ],
 });
 export default {
