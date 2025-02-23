@@ -22,7 +22,7 @@
       <input
         type="text"
         @keyup.enter="redirect"
-        v-model="this.terms"
+        v-model="terms"
         class="w-2/3 p-2 m-2 bg-slate-100 rounded mt-6 text-slate-800 outline-none"
         placeholder="Enter a search term (eg. bmgt, cmsc320, fsoc)..."
       />
