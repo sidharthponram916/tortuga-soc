@@ -10,15 +10,29 @@
 </template>
 
 <script>
+import { useHead } from "unhead";
 import Navbar from "@/components/Navbar.vue";
-import Footer from "@/components/Footer.vue"
+import Footer from "@/components/Footer.vue";
+
+useHead({
+  title: "Tortuga SOC",
+  meta: [
+    {
+      property: "og:description",
+      content: "Schedule of Classes, Redefined.",
+    },
+    { property: "og:url", content: "https://tortuga-soc.vercel.app" },
+    { property: "og:image", content: "/assets/favicon.png" },
+    { name: "theme-color", content: "#FF0000" },
+  ],
+});
 export default {
   components: {
     Navbar,
-    Footer
+    Footer,
   },
-  mounted() { 
-    document.title = "Tortuga - Schedule of Classes"
-  }
+  mounted() {
+    document.title = "Tortuga - Schedule of Classes";
+  },
 };
 </script>
