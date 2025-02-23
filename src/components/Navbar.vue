@@ -16,7 +16,7 @@
       </nuxt-link>
       <input
         class="bg-white ml-auto p-2 rounded font-bold text-slate-800 outline-none"
-        placeholder="Search..."
+        placeholder="Search...."
         v-model = "terms"
         @keyup.enter = "redirect"
         type="text"
