@@ -22,8 +22,12 @@ useHead({
       content: "Schedule of Classes, Redefined.",
     },
     { property: "og:url", content: "https://tortuga-soc.vercel.app" },
-    { property: "og:image", content: "./assets/images/preview.png" },
+    { property: "og:image", content: "/assets/images/preview.png" },
     { name: "theme-color", content: "#FF0000" },
+    { name: "twitter:card", content: "summary_large_image" },
+    { name: "twitter:title", content: "Tortuga" },
+    { name: "twitter:description", content: "Get more out of UMD's Schedule of Classes." },
+    { name: "twitter:image", content: "/assets/images/preview.png" },
   ],
 });
 export default {
