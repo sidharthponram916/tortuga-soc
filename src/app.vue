@@ -22,7 +22,7 @@ useHead({
       content: "Schedule of Classes, Redefined.",
     },
     { property: "og:url", content: "https://tortuga-soc.vercel.app" },
-    { property: "og:image", content: "/assets/favicon.png" },
+    { property: "og:image", content: "./assets/images/preview.png" },
     { name: "theme-color", content: "#FF0000" },
   ],
 });
