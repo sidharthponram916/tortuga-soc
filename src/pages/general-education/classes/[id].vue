@@ -42,7 +42,7 @@
       </div>
     </div>
     <div
-      v-if="this.loading"
+      v-if="loading"
       class="p-56 m-auto flex flex-col justify-center items-center h-full"
     >
       <svg

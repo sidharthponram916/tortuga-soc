@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="this.error">
+    <div v-if="error">
       <div class="p-56 text-center m-2 text-3xl font-bold">
         <div class="text-8xl text-slate-500">404</div>
         We are sorry, but that entry cannot be found.
@@ -155,7 +155,7 @@
       </div>
     </div>
     <div
-      v-if="this.loading"
+      v-if="loading"
       class="p-64 m-auto flex flex-col justify-center items-center h-full"
     >
       <svg
