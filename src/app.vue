@@ -17,7 +17,11 @@ useHead({
   title: "Tortuga SOC",
   meta: [
     { property: "og:title", content: "Tortuga" },
-    { proprty: "og:description", content: "Make the most out of the Schedule of Classes."},
+    {
+      property: "og:description",
+      content: "Make the most out of the Schedule of Classes.",
+    },
+    { name: "theme-color", content: "#a81b1b" },
   ],
 });
 
