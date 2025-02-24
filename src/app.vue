@@ -10,7 +10,6 @@
 </template>
 
 <script>
-import { useHead } from "unhead";
 import Navbar from "@/components/Navbar.vue";
 import Footer from "@/components/Footer.vue";
 
@@ -19,13 +18,9 @@ useHead({
   meta: [
     { property: "og:title", content: "Tortuga" },
     { proprty: "og:description", content: "Make the most out of the Schedule of Classes."},
-    { property: "og:type", content: "website" },
-    { property: "og:url", content: "https://tortugasoc.com/" },
-    { property: "og:image", content: "https://tortugasoc.com/assets/images/preview.png" },
-    { property: "og:image:type", content: "image/png" },
-    { property: "og:image:alt", content: "Tortuga" },
   ],
 });
+
 export default {
   components: {
     Navbar,
