@@ -44,7 +44,7 @@
 export default {
   data() {
     return {
-      text: "Streamlining the Schedule of Classes at UMD ",
+      text: "Streamlining the Schedule of Classes at UMD. ",
       displayedText: "",
       index: 0,
       terms: "",

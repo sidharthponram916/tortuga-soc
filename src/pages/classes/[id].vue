@@ -231,6 +231,8 @@
           </div>
         </div>
       </div>
+      <img src = '@/assets/images/logos-formal-seal.webp' class = 'w-10 m-auto mb-2 mt-5' />
+      <div class = 'text-xs text-center'> search powered by <nuxt-link to = "https://app.testudo.umd.edu/soc/"> https://app.testudo.umd.edu/soc </nuxt-link></div>
     </div>
     <div
       v-if="loading"
@@ -287,7 +289,7 @@ export default defineComponent({
       let { data } = await axios.get(
         `https://schedule-of-classes-api.vercel.app/api/get-courses?name=${
           useRoute().params.id
-        }&date=202501`
+        }`
       );
 
       if (data.length == 0) {
