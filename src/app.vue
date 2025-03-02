@@ -12,6 +12,7 @@
 <script>
 import Navbar from "@/components/Navbar.vue";
 import Footer from "@/components/Footer.vue";
+import axios from "axios";
 
 useHead({
   title: "Tortuga SOC",
@@ -30,7 +31,19 @@ export default {
     Navbar,
     Footer,
   },
-  mounted() {
+  async mounted() {
+    const token = useCookie("auth_token");
+
+    try {
+      const data = await useFetch("/api/auth/verify", {
+        credentials: "include",
+      });
+
+      console.log(data)
+    } catch (e) {
+      console.log(e.message);
+    }
+
     document.title = "Tortuga - Schedule of Classes";
   },
 };

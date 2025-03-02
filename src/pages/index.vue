@@ -82,7 +82,7 @@ export default {
 
           setTimeout(this.startTypingEffect, 5000);
         }
-      }, 50); // Adjust typing speed here
+      }, 50); 
     },
     redirect() {
       if (this.flags.includes(this.terms.toUpperCase())) {

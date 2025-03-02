@@ -16,12 +16,12 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     dbURI: process.env.DB_URI,
-    salt: process.env.SALT, 
-    key: process.env.JWT_KEY
+    salt: process.env.SALT,
+    key: process.env.JWT_KEY,
   },
   vite: {
     plugins: [tailwindcss()],
   },
 
-  modules: ["nuxt-gtag"],
+  modules: ["nuxt-gtag", "@pinia/nuxt"],
 });

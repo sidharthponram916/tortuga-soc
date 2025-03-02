@@ -5,16 +5,41 @@ import jwt from "jsonwebtoken";
 export default defineEventHandler(async (event) => {
   try {
     const body: any = await readBody(event);
-
     const user = await User.findOne({ terpmail: body.terpmail });
-    if (!user) return { error: "User not found." };
+    if (!user)
+      throw createError({
+        statusCode: 404,
+        message: "This user was not found.",
+      });
 
     const matches = await bcrypt.compare(body.password, user.password);
-    if (!matches) return { error: "Invalid credentials." };
 
-    const token = jwt.sign({ id: `${user._id}` }, useRuntimeConfig().key);
-    return { ...user, token };
+    if (!matches)
+      throw createError({
+        statusCode: 401,
+        message: "You entered invalid credentials. Please try again.",
+      });
+
+    const { password, ...rest } = user.toObject();
+
+    const token = jwt.sign(
+      { id: `${user._id.toString()}` },
+      useRuntimeConfig().key,
+      {
+        expiresIn: "12h",
+      }
+    );
+
+    setCookie(event, "auth_token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      maxAge: 43200,
+      sameSite: "strict",
+      path: "/",
+    });
+
+    return rest;
   } catch (e: any) {
-    return { message: e.message };
+    throw createError({ statusCode: 500, message: e.message });
   }
 });

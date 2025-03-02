@@ -15,20 +15,26 @@ const userSchema = new Schema({
   },
   telephone: {
     type: String,
-    required: false,
+    default: "",
   },
   standing: {
     type: String,
     required: false,
+    default: "Not Set",
   },
   major: {
     type: String,
     required: false,
+    default: "Not Set",
   },
   saved_courses: {
     type: Array,
     required: false,
     default: [],
+  },
+  profile_complete: {
+    type: Boolean,
+    default: false,
   },
 });
 

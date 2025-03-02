@@ -16,8 +16,12 @@
         </div>
       </span>
     </nuxt-link>
-    <nuxt-link class="ml-10"> <b>My Watchlist</b> </nuxt-link>
-    <nuxt-link class="ml-10 text-xs"> <b class = 'text-base'>Schedule Builder</b> (coming soon)</nuxt-link>
+    <nuxt-link class="ml-10" to="/my-tools/watchlist">
+      <b>My Watchlist</b>
+    </nuxt-link>
+    <nuxt-link class="ml-10 text-xs">
+      <b class="text-base">Schedule Builder</b> (coming soon)</nuxt-link
+    >
     <input
       class="bg-white ml-auto p-2 rounded font-bold text-slate-800 outline-none"
       placeholder="Search...."
@@ -25,7 +29,7 @@
       @keyup.enter="redirect"
       type="text"
     />
-    <a href="/auth/register" class="ml-6"><b>Join Tortuga</b></a>
+    <nuxt-link to="/auth/register" class="ml-6"><b>Join Tortuga</b></nuxt-link>
   </div>
 </template>
 
