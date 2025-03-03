@@ -29,11 +29,18 @@
       @keyup.enter="redirect"
       type="text"
     />
-    <nuxt-link to="/auth/register" class="ml-6"><b>Join Tortuga</b></nuxt-link>
+    <nuxt-link to="/auth/register" class="ml-6 font-bold" v-if="!useAuthStore().loggedIn">
+      Join Tortuga
+    </nuxt-link>
+    <nuxt-link to="/my-tools/dashboard" class="ml-6 font-bold" v-else>
+      My Dashboard
+    </nuxt-link>
   </div>
 </template>
 
 <script>
+import { useAuthStore } from "~/stores/store.js";
+
 export default {
   data() {
     return {
@@ -55,6 +62,7 @@ export default {
       ],
     };
   },
+  mounted() {},
   methods: {
     redirect() {
       if (this.flags.includes(this.terms.toUpperCase())) {

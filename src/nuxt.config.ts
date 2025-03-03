@@ -18,6 +18,7 @@ export default defineNuxtConfig({
     dbURI: process.env.DB_URI,
     salt: process.env.SALT,
     key: process.env.JWT_KEY,
+    frontendURL: process.env.FRONTEND_URL
   },
   vite: {
     plugins: [tailwindcss()],

@@ -14,12 +14,17 @@
     </div>
     <div class="m-auto px-6">
       <div class="flex flex-row w-full">
-        <div class="p-4 m-4 bg-slate-200 text-2xl rounded font-semibold w-1/3">
-          <div class="text-center text-8xl mb-3">
-            <font-awesome-icon :icon="['fas', 'eye']" />
+        <nuxt-link
+          to="/my-tools/watchlist"
+          class="p-4 m-4 bg-slate-200 text-2xl rounded font-semibold w-1/3"
+        >
+          <div>
+            <div class="text-center text-8xl mb-3">
+              <font-awesome-icon :icon="['fas', 'eye']" />
+            </div>
+            <div class="text-center">Personal Watchlist</div>
           </div>
-          <div class="text-center">Personal Watchlist</div>
-        </div>
+        </nuxt-link>
         <div class="p-4 m-4 bg-slate-200 text-2xl font-semibold rounded w-1/3">
           <div class="text-center text-8xl mb-3">
             <font-awesome-icon :icon="['fas', 'bullseye']" />
@@ -56,7 +61,9 @@ export default {
       const token = useCookie("auth_token");
       token.value = null;
 
-      return navigateTo("/auth/sign-in");
+      useAuthStore().logOut();
+
+      location.replace("/auth/sign-in");
     },
   },
 };

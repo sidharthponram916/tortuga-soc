@@ -26,25 +26,16 @@ useHead({
   ],
 });
 
+
 export default {
   components: {
     Navbar,
     Footer,
   },
   async mounted() {
-    const token = useCookie("auth_token");
-
-    try {
-      const data = await useFetch("/api/auth/verify", {
-        credentials: "include",
-      });
-
-      console.log(data)
-    } catch (e) {
-      console.log(e.message);
-    }
-
     document.title = "Tortuga - Schedule of Classes";
+
+    console.log(useAuthStore().loggedIn);
   },
 };
 </script>

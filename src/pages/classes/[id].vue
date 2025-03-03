@@ -189,13 +189,16 @@
                   </div>
                 </div>
               </div>
-              <div class="flex flex-row ml-auto mb-auto bg-slate-500 w-1/5">
-                <div class = 'm-auto w-full flex flex-grid grid-rows-2'>
+              <div
+                v-if="useAuthStore().user.user"
+                class="flex flex-row ml-auto mb-auto bg-slate-500 w-1/5"
+              >
+                <div class="m-auto w-full flex flex-grid grid-rows-2">
                   <div
                     :class="
                       defineColor(100 - 100 * (section.open / section.total))
                     "
-                    class="text-center text-slate-800 p-2 text-base bg-slate-200 font-bold w-6/7"
+                    class="text-center text-slate-800 p-2 text-base font-bold w-6/7"
                   >
                     <div>
                       {{
@@ -210,9 +213,36 @@
                     </div>
                   </div>
                   <div
-                    class="text-center bg-yellow-500 text-slate-100 p-2 text-lg font-bold items-center justify-center w-1/7"
+                    :class="
+                      defineBookmarkColor(course.id, course.title, section)
+                    "
+                    class="text-center p-2 text-lg cursor-pointer font-bold items-center justify-center w-1/7"
+                    @click="saveCourse(course.id, course.title, section)"
                   >
                     <font-awesome-icon :icon="['fas', 'bookmark']" />
+                  </div>
+                </div>
+              </div>
+              <div
+                v-else
+                class="flex flex-row ml-auto mb-auto w-1/7"
+              >
+                <div
+                  :class="
+                    defineColor(100 - 100 * (section.open / section.total))
+                  "
+                  class="text-center w-full text-slate-800 p-2 text-base font-bold"
+                >
+                  <div>
+                    {{
+                      (100 * (section.open / section.total)).toFixed(1) == 0
+                        ? "Closed"
+                        : "Available"
+                    }}
+                  </div>
+                  <div class="text-sm font-medium">
+                    <b class="text-sm">{{ section.open }}</b> open,
+                    <b class="text-sm">{{ section.total }}</b> seats
                   </div>
                 </div>
               </div>
@@ -231,8 +261,16 @@
           </div>
         </div>
       </div>
-      <img src = '@/assets/images/logos-formal-seal.webp' class = 'w-10 m-auto mb-2 mt-5' />
-      <div class = 'text-xs text-center'> search powered by <nuxt-link to = "https://app.testudo.umd.edu/soc/"> https://app.testudo.umd.edu/soc </nuxt-link></div>
+      <img
+        src="@/assets/images/logos-formal-seal.webp"
+        class="w-10 m-auto mb-2 mt-5"
+      />
+      <div class="text-xs text-center">
+        search powered by
+        <nuxt-link to="https://app.testudo.umd.edu/soc/">
+          https://app.testudo.umd.edu/soc
+        </nuxt-link>
+      </div>
     </div>
     <div
       v-if="loading"
@@ -270,6 +308,10 @@
 import axios from "axios";
 import { useRoute } from "vue-router";
 
+definePageMeta({
+  middleware: ["auth"],
+});
+
 export default defineComponent({
   data() {
     return {
@@ -283,8 +325,6 @@ export default defineComponent({
     };
   },
   async mounted() {
-    console.log(this.isWithinBounds("3:30pm", "9:45pm", "9:00am", "5:00pm"));
-
     try {
       let { data } = await axios.get(
         `https://schedule-of-classes-api.vercel.app/api/get-courses?name=${
@@ -319,6 +359,59 @@ export default defineComponent({
         return "bg-slate-700 text-white";
       } else {
         return "bg-slate-200 text-slate-700";
+      }
+    },
+    defineBookmarkColor(id, name, section) {
+      let user = useAuthStore().user.user;
+
+      let entry = {
+        course_id: id,
+        course_name: name,
+        section: section,
+      };
+
+      let entryExists = user.saved_courses.find((course) => {
+        return (
+          course.section.id == entry.section.id &&
+          course.course_id == entry.course_id
+        );
+      });
+
+      if (!entryExists) {
+        return "text-white bg-slate-300";
+      } else {
+        return "bg-red-700 text-yellow-500";
+      }
+    },
+    async saveCourse(id, name, section) {
+      try {
+        let user = useAuthStore().user.user;
+
+        let entry = {
+          course_id: id,
+          course_name: name,
+          section: section,
+        };
+
+        let index = user.saved_courses.findIndex(
+          (course) =>
+            course.section.id === entry.section.id &&
+            course.course_id === entry.course_id
+        );
+
+        console.log(index);
+
+        if (index == -1) {
+          user.saved_courses.push(entry);
+        } else {
+          user.saved_courses.splice(index, 1);
+        }
+
+        await axios.put("/api/auth/update", user, {
+          withCredentials: true,
+        });
+      } catch (e) {
+        console.log(e.message);
       }
     },
     defineAccentColor(value) {

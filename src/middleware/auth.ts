@@ -1,5 +1,5 @@
 import { defineNuxtRouteMiddleware, navigateTo } from "nuxt/app";
-import { useAuthStore } from '~/stores/store.js'
+import { useAuthStore } from "~/stores/store.js";
 
 export default defineNuxtRouteMiddleware(async (to, from) => {
   // Access the cookie value
@@ -8,13 +8,20 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
       credentials: "include",
     });
 
-    if (error.value) {
+
+    if (
+      error.value &&
+      (to.path.startsWith("/my-tools") || to.path == "/profile")
+    ) {
       return navigateTo("/auth/sign-in");
+    } else if (!error.value) {
+      let authStore = useAuthStore();
+      authStore.logIn(data);
+
+      console.log("logged in!"); 
+      return;
     }
 
-    let authStore = useAuthStore(); 
-
-    authStore.logIn(data); 
     return;
   } catch (e) {
     return navigateTo("/auth/sign-in");

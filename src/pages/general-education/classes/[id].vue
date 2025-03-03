@@ -77,6 +77,10 @@
 import axios from "axios";
 import { useRoute } from "vue-router";
 
+definePageMeta({
+  middleware: ["auth"],
+});
+
 export default {
   data() {
     return {

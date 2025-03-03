@@ -9,7 +9,7 @@ export default defineEventHandler(async (event) => {
     if (!user)
       throw createError({
         statusCode: 404,
-        message: "This user was not found.",
+        statusMessage: "This user was not found.",
       });
 
     const matches = await bcrypt.compare(body.password, user.password);
@@ -17,7 +17,7 @@ export default defineEventHandler(async (event) => {
     if (!matches)
       throw createError({
         statusCode: 401,
-        message: "You entered invalid credentials. Please try again.",
+        statusMessage: "You entered invalid credentials. Please try again.",
       });
 
     const { password, ...rest } = user.toObject();
@@ -40,6 +40,6 @@ export default defineEventHandler(async (event) => {
 
     return rest;
   } catch (e: any) {
-    throw createError({ statusCode: 500, message: e.message });
+    throw createError({ statusCode: 500, statusMessage: e.message });
   }
 });

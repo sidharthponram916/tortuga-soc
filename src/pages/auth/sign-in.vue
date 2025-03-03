@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col items-center justify-center">
     <div class="mx-auto w-1/3 p-10 mt-16">
-      <div class="text-center text-3xl font-bold text-slate-700 mb-5">Sign in for more.</div>
+      <div class="text-center text-3xl font-bold text-slate-700 mb-5">Sign in to <span class = 'text-yellow-600'>Tortuga</span>.</div>
       <div class="text-center">
         <input
           type="email"
@@ -39,9 +39,9 @@
         >.
       </div>
       <div class="px-4 pt-3 text-sm text-center">
-        Already have an account? Click here to
-        <nuxt-link class="text-blue-600 font-semibold" to="/auth/sign-in"
-          >sign in</nuxt-link
+        Don't have an account? Click here to
+        <nuxt-link class="text-blue-600 font-semibold" to="/auth/register"
+          >sign up</nuxt-link
         >.
       </div>
     </div>

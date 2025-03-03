@@ -41,6 +41,12 @@
   </div>
 </template>
 <script>
+
+definePageMeta({
+  middleware: ["auth"],
+});
+
+
 export default {
   data() {
     return {

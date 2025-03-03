@@ -2,7 +2,7 @@
   <div class="flex flex-col items-center justify-center">
     <div class="mx-auto w-1/3 p-10 mt-16">
       <div class="text-center text-3xl font-bold text-slate-700 mb-5">
-        Sign up today. It's free.
+        Join <span class = 'text-yellow-600'>Tortuga</span> today.
       </div>
       <div class="text-center">
         <input
@@ -43,9 +43,9 @@
         {{ this.message }}
       </div>
       <div class="px-4 pt-5 text-sm text-center">
-        Forgot your password? Click here for a
+        By making an account, you confirm that you have read our 
         <nuxt-link class="text-blue-600 font-semibold" to="/auth/password-reset"
-          >password reset</nuxt-link
+          >privacy policy</nuxt-link
         >.
       </div>
       <div class="px-4 pt-3 text-sm text-center">

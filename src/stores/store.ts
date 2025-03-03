@@ -24,8 +24,5 @@ export const useAuthStore = defineStore("authStore", {
       this.loggedIn = false;
       this.user = {} as User;
     },
-    setUserData() { 
-
-    }
   },
 });

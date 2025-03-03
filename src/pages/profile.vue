@@ -2,7 +2,7 @@
   <div class="flex flex-col items-center justify-center">
     <div class="mx-auto w-1/3 p-10 mt-10">
       <div class="text-center text-3xl font-bold text-slate-700 mb-5">
-        Fill the user profile.
+        Fill your user profile.
       </div>
       <div class="text-center">
         <input
