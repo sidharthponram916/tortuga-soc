@@ -13,32 +13,45 @@
       </div>
     </div>
     <div class="m-auto px-6">
-      <div class="flex flex-row w-full">
+      <div class="flex w-full">
         <nuxt-link
           to="/my-tools/watchlist"
-          class="p-4 m-4 bg-slate-200 text-2xl rounded font-semibold w-1/3"
+          class="p-4 m-4 bg-slate-100 hover:bg-slate-200 text-2xl rounded font-semibold w-1/3"
         >
           <div>
             <div class="text-center text-8xl mb-3">
               <font-awesome-icon :icon="['fas', 'eye']" />
             </div>
-            <div class="text-center">Personal Watchlist</div>
+            <div class="text-center">Course Watcher</div>
+            <div class="text-center text-sm font-light mt-2">
+              Get periodic email or SMS updates on the seat status of your
+              bookmarked sections.
+            </div>
           </div>
         </nuxt-link>
-        <div class="p-4 m-4 bg-slate-200 text-2xl font-semibold rounded w-1/3">
-          <div class="text-center text-8xl mb-3">
-            <font-awesome-icon :icon="['fas', 'bullseye']" />
+        <nuxt-link
+          to="/my-tools/watchlist"
+          class="p-4 m-4 bg-slate-100 hover:bg-slate-200 text-2xl rounded font-semibold w-1/3"
+        >
+          <div>
+            <div class="text-center text-8xl mb-3">
+              <font-awesome-icon :icon="['fas', 'bullseye']" />
+            </div>
+            <div class="text-center">Section Slingshot</div>
+            <div class="text-center text-sm font-light mt-2">
+              No more waitlist check-ins, be the first to be notified of any
+              openings of desired closed courses.
+            </div>
           </div>
-          <div class="text-center">
-            Course Sniper <span class="text-xs"> (coming soon) </span>
-          </div>
-        </div>
-        <div class="p-4 m-4 bg-slate-200 text-2xl font-semibold rounded w-1/3">
+        </nuxt-link>
+        <div class="p-4 m-4 bg-slate-300 text-2xl font-semibold rounded w-1/3">
           <div class="text-center text-8xl mb-3">
             <font-awesome-icon :icon="['fas', 'book']" />
           </div>
-          <div class="text-center">
-            Degree Assistant <span class="text-xs"> (coming soon) </span>
+          <div class="text-center">Schedule Builder</div>
+          <div class="text-center text-sm font-light mt-2">
+            Autogenerate an effective schedule, catered to your needs.
+            <span class="text-xs"> (coming soon) </span>
           </div>
         </div>
       </div>

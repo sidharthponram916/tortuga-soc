@@ -7,23 +7,23 @@
       <div class="text-center">
         <input
           type="password"
-          v-model="user.terpmail"
+          v-model="user.old_password"
           class="p-2 m-2 w-11/12 rounded outline-none border-2 border-slate-400 focus:border-2 focus:border-yellow-500"
           placeholder="Old Password"
         />
       </div>
       <div class="text-center">
         <input
-          type="email"
-          v-model="user.terpmail"
+          type="password"
+          v-model="user.new_password"
           class="p-2 m-2 w-11/12 rounded outline-none border-2 border-slate-400 focus:border-2 focus:border-yellow-500"
           placeholder="New Password"
         />
       </div>
       <div class="text-center">
         <input
-          type="email"
-          v-model="user.terpmail"
+          type="password"
+          v-model="user.new_password_confirm"
           class="p-2 m-2 w-11/12 rounded outline-none border-2 border-slate-400 focus:border-2 focus:border-yellow-500"
           placeholder="Confirm New Password"
         />
@@ -31,7 +31,7 @@
 
       <div class="text-center">
         <button
-          @click="sendPasswordReset"
+          @click="changePassword"
           class="p-2 m-2 bg-red-700 cursor-pointer font-semibold w-11/12 rounded text-white mt-5"
         >
           Change Password
@@ -61,16 +61,24 @@ export default {
   data() {
     return {
       user: {
-        terpmail: "",
+        old_password: "",
+        id: useRoute().params.id,
+        token: useRoute().params.token,
+        new_password: "",
+        new_password_confirm: "",
       },
       message: "",
     };
   },
   methods: {
-    async sendPasswordReset() {
+    async changePassword() {
       try {
-        await axios.post("/api/auth/change-password", this.user);
-        location.replace("/auth/sign-in");
+        if (this.user.new_password == this.user.new_password_confirm) {
+          await axios.post("/api/auth/change-password", this.user);
+          location.replace("/auth/sign-in");
+        } else {
+          this.message = "Passwords do not match.";
+        }
       } catch (e) {
         this.message = e.response?.data?.message;
       }

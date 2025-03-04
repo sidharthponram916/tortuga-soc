@@ -17,7 +17,7 @@
       </span>
     </nuxt-link>
     <nuxt-link class="ml-10" to="/my-tools/watchlist">
-      <b>My Watchlist</b>
+      <b>Course Watcher</b>
     </nuxt-link>
     <nuxt-link class="ml-10 text-xs">
       <b class="text-base">Schedule Builder</b> (coming soon)</nuxt-link

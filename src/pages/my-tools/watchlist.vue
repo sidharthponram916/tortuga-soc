@@ -6,8 +6,8 @@
         <div class="text-sm mt-1">
           Bookmark courses across the website and track them here. This list
           will refresh every five minutes. You can opt in to receive SMS
-          notifications for period updates on the seat status of these classes
-          by providing your phone number in settings.
+          notifications for periodic updates on the seat status of these classes
+          by providing your email in settings.
         </div>
       </div>
     </div>

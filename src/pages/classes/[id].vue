@@ -356,7 +356,7 @@ export default defineComponent({
   methods: {
     defineColor(value) {
       if (value == 100) {
-        return "bg-slate-700 text-white";
+        return "bg-slate-600 text-white";
       } else {
         return "bg-slate-200 text-slate-700";
       }
