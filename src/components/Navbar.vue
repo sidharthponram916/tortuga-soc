@@ -16,10 +16,10 @@
         </div>
       </span>
     </nuxt-link>
-    <nuxt-link class="ml-10" to="/my-tools/watchlist">
+    <nuxt-link class="hidden md:block ml-10" to="/my-tools/watchlist">
       <b>Course Watcher</b>
     </nuxt-link>
-    <nuxt-link to="/my-tools/slingshot" class="ml-10 text-xs">
+    <nuxt-link to="/my-tools/slingshot" class="hidden md:block ml-10 text-xs">
       <b class="text-base">Section Slingshot</b></nuxt-link
     >
     <input
@@ -31,13 +31,24 @@
     />
     <nuxt-link
       to="/auth/register"
-      class="ml-6 font-bold"
+      class="ml-6 font-bold hidden md:block"
       v-if="!useAuthStore().loggedIn"
     >
       Join Tortuga
     </nuxt-link>
-    <nuxt-link to="/my-tools/dashboard" class="ml-6 font-bold" v-else>
+    <nuxt-link
+      to="/my-tools/dashboard"
+      class="ml-6 hidden md-block font-bold"
+      v-else
+    >
       My Dashboard
+    </nuxt-link>
+    <nuxt-link
+      to="/auth/register"
+      class="ml-6 font-bold md:hidden"
+      v-if="!useAuthStore().loggedIn"
+    >
+    <font-awesome-icon :icon="['fas', 'arrow-right-to-bracket']" />
     </nuxt-link>
   </div>
 </template>

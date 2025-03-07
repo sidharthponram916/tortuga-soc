@@ -4,10 +4,9 @@
       <div class="w-3/4">
         <div class="text-3xl font-bold">My Fall 2025 Watchlist</div>
         <div class="text-sm mt-1">
-          Bookmark courses across the website and track them here. This list
-          will refresh every five minutes. You can opt in/out to receive email/SMS
-          notifications for periodic updates on the seat status of these classes
-          by toggling them in the profile page. 
+          Keep an eye on your courses and alerts you via email if a course
+          closes. It would then roll over to Section Slingshot and notify you if
+          the course opens up again.
         </div>
       </div>
     </div>
@@ -117,7 +116,7 @@
                 saveCourse(course.course_id, course.course_name, course.section)
               "
             >
-            <font-awesome-icon :icon="['fas', 'trash']" />
+              <font-awesome-icon :icon="['fas', 'trash']" />
             </div>
           </div>
         </div>

@@ -7,7 +7,7 @@
       />
 
       <!-- Make text visible on mobile -->
-      <div class="text-2xl md:text-4xl mt-4">
+      <div class="text-3xl md:text-4xl mt-4">
         {{ displayedText }}
         <span class="ml-2 text-white">
           <font-awesome-icon :icon="['fas', 'ellipsis-vertical']" />
@@ -19,7 +19,7 @@
         <div v-for="flag in flags" :key="flag">
           <nuxt-link :to="'/general-education/classes/' + flag">
             <div
-              class="px-4 py-2 bg-slate-200 hover:bg-slate-700 text-sm font-bold text-black hover:text-white rounded w-auto text-center"
+              class="px-4 py-2 bg-slate-200 hover:bg-slate-700 text-xs md:text-sm font-bold text-black hover:text-white rounded w-auto text-center"
             >
               {{ flag }}
             </div>

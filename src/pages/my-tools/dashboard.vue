@@ -31,7 +31,7 @@
           </div>
         </nuxt-link>
         <nuxt-link
-          to="/my-tools/watchlist"
+          to="/my-tools/slingshot"
           class="p-4 m-4 bg-slate-100 hover:bg-slate-200 text-2xl rounded font-semibold w-1/3"
         >
           <div>
