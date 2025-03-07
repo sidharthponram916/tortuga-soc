@@ -19,8 +19,8 @@
     <nuxt-link class="ml-10" to="/my-tools/watchlist">
       <b>Course Watcher</b>
     </nuxt-link>
-    <nuxt-link class="ml-10 text-xs">
-      <b class="text-base">Schedule Builder</b> (coming soon)</nuxt-link
+    <nuxt-link to="/my-tools/slingshot" class="ml-10 text-xs">
+      <b class="text-base">Section Slingshot</b></nuxt-link
     >
     <input
       class="bg-white ml-auto p-2 rounded font-bold text-slate-800 outline-none"
@@ -29,7 +29,11 @@
       @keyup.enter="redirect"
       type="text"
     />
-    <nuxt-link to="/auth/register" class="ml-6 font-bold" v-if="!useAuthStore().loggedIn">
+    <nuxt-link
+      to="/auth/register"
+      class="ml-6 font-bold"
+      v-if="!useAuthStore().loggedIn"
+    >
       Join Tortuga
     </nuxt-link>
     <nuxt-link to="/my-tools/dashboard" class="ml-6 font-bold" v-else>

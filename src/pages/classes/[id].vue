@@ -224,13 +224,13 @@
                   </div>
                   <div
                     :class="
-                      defineBookmarkColor(course.id, course.title, section)
+                      defineSlingshotColor(course.id, course.title, section)
                     "
                     v-else
                     class="text-center p-2 text-lg cursor-pointer font-bold items-center justify-center w-1/7"
-                    @click="saveCourse(course.id, course.title, section)"
+                    @click="addToSlingshot(course.id, course.title, section)"
                   >
-                  <font-awesome-icon :icon="['fas', 'crosshairs']" />
+                    <font-awesome-icon :icon="['fas', 'crosshairs']" />
                   </div>
                 </div>
               </div>
@@ -337,7 +337,7 @@ export default defineComponent({
       let { data } = await axios.get(
         `https://schedule-of-classes-api.vercel.app/api/get-courses?name=${
           useRoute().params.id
-        }&date=202501`
+        }`
       );
 
       if (data.length == 0) {
@@ -391,6 +391,28 @@ export default defineComponent({
         return "bg-red-700 text-yellow-500";
       }
     },
+    defineSlingshotColor(id, name, section) {
+      let user = useAuthStore().user.user;
+
+      let entry = {
+        course_id: id,
+        course_name: name,
+        section: section,
+      };
+
+      let entryExists = user.slingshot_courses.find((course) => {
+        return (
+          course.section.id == entry.section.id &&
+          course.course_id == entry.course_id
+        );
+      });
+
+      if (!entryExists) {
+        return "text-slate-100 bg-slate-300";
+      } else {
+        return "bg-green-600 text-slate-100";
+      }
+    },
     async saveCourse(id, name, section) {
       try {
         let user = useAuthStore().user.user;
@@ -410,9 +432,41 @@ export default defineComponent({
         console.log(index);
 
         if (index == -1) {
-          user.saved_courses.push(entry);
+          user.saved_courses.unshift(entry);
         } else {
           user.saved_courses.splice(index, 1);
+        }
+
+        await axios.put("/api/auth/update", user, {
+          withCredentials: true,
+        });
+      } catch (e) {
+        console.log(e.message);
+      }
+    },
+    async addToSlingshot(id, name, section) {
+      try {
+        let user = useAuthStore().user.user;
+
+        let entry = {
+          course_id: id,
+          course_name: name,
+          section: section,
+          status: "Active",
+        };
+
+        let index = user.slingshot_courses.findIndex(
+          (course) =>
+            course.section.id === entry.section.id &&
+            course.course_id === entry.course_id
+        );
+
+        console.log(index);
+
+        if (index == -1) {
+          user.slingshot_courses.unshift(entry);
+        } else {
+          user.slingshot_courses.splice(index, 1);
         }
 
         await axios.put("/api/auth/update", user, {

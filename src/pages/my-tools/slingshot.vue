@@ -2,17 +2,15 @@
   <div class="p-10">
     <div class="mb-5">
       <div class="w-3/4">
-        <div class="text-3xl font-bold">My Fall 2025 Watchlist</div>
+        <div class="text-3xl font-bold">My Fall 2025 Slingshots</div>
         <div class="text-sm mt-1">
-          Bookmark courses across the website and track them here. This list
-          will refresh every five minutes. You can opt in/out to receive email/SMS
-          notifications for periodic updates on the seat status of these classes
-          by toggling them in the profile page. 
+          Once a course from this list becomes open again, you will recieve an
+          email notification. List updates every five minutes.
         </div>
       </div>
     </div>
     <div
-      v-for="course in saved_courses"
+      v-for="course in slingshot_courses"
       :key="course.course_id + course.section.id"
       class="odd:bg-yellow-50 even:bg-slate-50 px-2"
     >
@@ -20,6 +18,12 @@
         <div class="flex flex-col">
           <div class="text-sm font-bold text-slate-400">
             <div class="text-sm font-bold text-slate-500">
+              <pre v-if="course.status == 'Active'" class="text-green-600">{{
+                course.status.toUpperCase()
+              }}</pre>
+              <pre v-else class="text-red-600">{{
+                course.status.toUpperCase()
+              }}</pre>
               <span class="text-slate-400"> {{ course.section.id }} </span> -
               {{ course.course_id }} -
               {{ course.course_name }}
@@ -117,14 +121,15 @@
                 saveCourse(course.course_id, course.course_name, course.section)
               "
             >
-            <font-awesome-icon :icon="['fas', 'trash']" />
+              <font-awesome-icon :icon="['fas', 'trash']" />
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div v-if="saved_courses.length == 0" class="text-slate-500 font-bold">
-      No courses on the watchlist. Add them through browsing the course catalog.
+    <div v-if="slingshot_courses.length == 0" class="text-slate-500 font-bold">
+      You have no active slingshot watches. Go to the course catalog and find a
+      closed course!
     </div>
   </div>
 </template>
@@ -139,12 +144,13 @@ definePageMeta({
 export default {
   data() {
     return {
-      saved_courses: [],
+      slingshot_courses: [],
     };
   },
   async mounted() {
     let user = useAuthStore().user.user;
-    this.saved_courses = user.saved_courses;
+    this.slingshot_courses = user.slingshot_courses;
+    console.log(user.slingshot_courses);
   },
   methods: {
     defineAccentColor(value) {
@@ -165,7 +171,7 @@ export default {
         section: section,
       };
 
-      let entryExists = user.saved_courses.find((course) => {
+      let entryExists = user.slingshot_courses.find((course) => {
         return (
           course.section.id == entry.section.id &&
           course.course_id == entry.course_id
@@ -175,7 +181,7 @@ export default {
       if (!entryExists) {
         return "text-yellow-600 bg-slate-200";
       } else {
-        return "bg-yellow-500 text-slate-100";
+        return "bg-green-600 text-slate-100";
       }
     },
     defineColor(value) {
@@ -195,7 +201,7 @@ export default {
           section: section,
         };
 
-        let index = user.saved_courses.findIndex(
+        let index = user.slingshot_courses.findIndex(
           (course) =>
             course.section.id === entry.section.id &&
             course.course_id === entry.course_id
@@ -204,9 +210,9 @@ export default {
         console.log(index);
 
         if (index == -1) {
-          user.saved_courses.push(entry);
+          user.slingshot_courses.push(entry);
         } else {
-          user.saved_courses.splice(index, 1);
+          user.slingshot_courses.splice(index, 1);
         }
 
         await axios.put("/api/auth/update", user, {
