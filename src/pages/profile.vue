@@ -1,8 +1,9 @@
 <template>
   <div class="flex flex-col items-center justify-center">
-    <div class="mx-auto w-1/3 p-10 mt-10">
+    <div class="mx-auto w-1/3 p-5 mt-10">
       <div class="text-center text-3xl font-bold text-slate-700 mb-5">
         Fill your user profile.
+        <span class="text-sm font-medium"> (optional)</span>
       </div>
       <div class="text-center">
         <input
@@ -43,7 +44,28 @@
           <option value="2028">2028</option>
         </select>
       </div>
-
+      <div class="text-center mt-1">
+        <div class="text-left px-4">
+          Registration Date and Time<br />
+          <span class="text-xs">
+            get an email notification on the day of your registration.
+          </span>
+        </div>
+        <input
+          type="date"
+          class="p-2 m-2 bg-white w-11/12 rounded outline-none border-2 border-slate-400 focus:border-2 focus:border-yellow-500"
+          placeholder="Academic Major"
+          v-model="user.registration_date"
+        />
+      </div>
+      <div class="text-center">
+        <input
+          type="time"
+          class="p-2 m-2 bg-white w-11/12 rounded outline-none border-2 border-slate-400 focus:border-2 focus:border-yellow-500"
+          placeholder="Academic Major"
+          v-model="user.registration_time"
+        />
+      </div>
       <div class="text-center">
         <button
           @click="updateProfile"
@@ -84,6 +106,8 @@ export default {
         username: "",
         terpmail: "",
         password: "",
+        registration_date: "",
+        registration_time: "",
         major: "",
         standing: "2024",
       },

@@ -216,17 +216,25 @@
                     :class="
                       defineBookmarkColor(course.id, course.title, section)
                     "
+                    v-if="section.open > 0"
                     class="text-center p-2 text-lg cursor-pointer font-bold items-center justify-center w-1/7"
                     @click="saveCourse(course.id, course.title, section)"
                   >
                     <font-awesome-icon :icon="['fas', 'bookmark']" />
                   </div>
+                  <div
+                    :class="
+                      defineBookmarkColor(course.id, course.title, section)
+                    "
+                    v-else
+                    class="text-center p-2 text-lg cursor-pointer font-bold items-center justify-center w-1/7"
+                    @click="saveCourse(course.id, course.title, section)"
+                  >
+                  <font-awesome-icon :icon="['fas', 'crosshairs']" />
+                  </div>
                 </div>
               </div>
-              <div
-                v-else
-                class="flex flex-row ml-auto mb-auto w-1/7"
-              >
+              <div v-else class="flex flex-row ml-auto mb-auto w-1/7">
                 <div
                   :class="
                     defineColor(100 - 100 * (section.open / section.total))
@@ -329,7 +337,7 @@ export default defineComponent({
       let { data } = await axios.get(
         `https://schedule-of-classes-api.vercel.app/api/get-courses?name=${
           useRoute().params.id
-        }`
+        }&date=202501`
       );
 
       if (data.length == 0) {

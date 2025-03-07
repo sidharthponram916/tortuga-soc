@@ -1,10 +1,11 @@
 <template>
   <div>
-    <div class="flex p-10 w-full">
+    <div class="flex px-10 pt-10 w-full">
       <div class="flex flex-col">
         <div class="text-3xl font-bold">My Dashboard</div>
-        <div class="text-sm">
+        <div class="text-sm pt-1">
           This is where you can see what services are available from Tortuga.
+          Set your registration date below so you can receive notifications.
         </div>
       </div>
       <div class="p-2 ml-auto text-sm">
@@ -35,7 +36,7 @@
         >
           <div>
             <div class="text-center text-8xl mb-3">
-              <font-awesome-icon :icon="['fas', 'bullseye']" />
+              <font-awesome-icon :icon="['fas', 'crosshairs']" />
             </div>
             <div class="text-center">Section Slingshot</div>
             <div class="text-center text-sm font-light mt-2">

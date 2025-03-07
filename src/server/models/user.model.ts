@@ -27,14 +27,29 @@ const userSchema = new Schema({
     required: false,
     default: "Not Set",
   },
+  registration_date: {
+    type: String,
+    required: false,
+    default: "Not Set",
+  },
+  registration_time: {
+    type: String,
+    required: false,
+    default: "Not Set",
+  },
   saved_courses: {
     type: Array,
     required: false,
     default: [],
   },
-  profile_complete: {
+  slingshot_courses: {
+    type: Array,
+    required: false,
+    default: [],
+  },
+  notifications: {
     type: Boolean,
-    default: false,
+    default: true,
   },
 });
 

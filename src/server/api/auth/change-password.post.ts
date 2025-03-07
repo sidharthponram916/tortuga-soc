@@ -14,14 +14,6 @@ export default defineEventHandler(async (event) => {
         statusMessage: "This is an invalid link.",
       });
 
-    const matches = await bcrypt.compare(body.old_password, user.password);
-
-    if (!matches)
-      throw createError({
-        statusCode: 401,
-        statusMessage: "You entered invalid credentials. Please try again.",
-      });
-
     const token = await EmailToken.findOne({
       userId: user._id,
       token: body.token,

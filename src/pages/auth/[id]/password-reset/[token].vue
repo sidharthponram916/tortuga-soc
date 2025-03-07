@@ -7,14 +7,6 @@
       <div class="text-center">
         <input
           type="password"
-          v-model="user.old_password"
-          class="p-2 m-2 w-11/12 rounded outline-none border-2 border-slate-400 focus:border-2 focus:border-yellow-500"
-          placeholder="Old Password"
-        />
-      </div>
-      <div class="text-center">
-        <input
-          type="password"
           v-model="user.new_password"
           class="p-2 m-2 w-11/12 rounded outline-none border-2 border-slate-400 focus:border-2 focus:border-yellow-500"
           placeholder="New Password"
