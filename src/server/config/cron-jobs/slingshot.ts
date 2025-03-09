@@ -89,13 +89,12 @@ const slingshotUpdates = async () => {
           `SECTION SLINGSHOT: Cron running for user: ${user.terpmail}`
         );
 
-        let updated = false;
-
-        if (!user.slingshot_courses) return;
+        if (!user.slingshot_courses) continue;
 
         if (user.slingshot_courses.length > 0) {
           for (let course of user.slingshot_courses) {
             if (course.status != "Active") continue;
+            let updated = false;
 
             let { data } = await axios.get(
               `https://schedule-of-classes-api.vercel.app/api/get-courses?name=${course.course_id}`
@@ -111,10 +110,12 @@ const slingshotUpdates = async () => {
 
             if (c_info.open != 0) {
               course.status = "Inactive (Email Sent Successfully)";
+
+              course.section.open = c_info.open;
               updated = true;
               user.markModified("slingshot_courses");
 
-              sendEmail(
+              await sendEmail(
                 `${user.terpmail}`,
                 `[SECTION OPENED NOTIFICATION] Hey, ${user.username}! ${
                   course.course_id
