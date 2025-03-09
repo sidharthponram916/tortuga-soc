@@ -61,7 +61,7 @@
         </path>
       </svg>
       <div class="mt-10 text-sm font-bold">
-        This may take a bit depending on your search query.
+        This may take a bit depending on your search.
       </div>
     </div>
   </div>
