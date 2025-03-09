@@ -1,6 +1,6 @@
 <template>
   <div
-    class="items-center flex fixed left-0 right-0 p-4 bg-slate-950 items-center text-slate-200"
+    class="items-center flex fixed left-0 right-0 p-4 bg-slate-950 items-center text-slate-200 overflow-visible"
   >
     <nuxt-link to="/" class="cursor-pointer">
       <span class="flex items-center space-x-3">
@@ -22,13 +22,9 @@
     <nuxt-link to="/my-tools/slingshot" class="hidden md:block ml-10 text-xs">
       <b class="text-base">Section Slingshot</b></nuxt-link
     >
-    <input
-      class="bg-white ml-auto p-2 rounded font-bold text-slate-800 outline-none"
-      placeholder="Search...."
-      v-model="terms"
-      @keyup.enter="redirect"
-      type="text"
-    />
+    <div class = 'ml-auto relative'>
+    <Searchbar />
+    </div>
     <nuxt-link
       to="/auth/register"
       class="ml-6 font-bold hidden md:block"
@@ -38,7 +34,7 @@
     </nuxt-link>
     <nuxt-link
       to="/my-tools/dashboard"
-      class="ml-6 hidden md-block font-bold"
+      class="ml-6 hidden md:block font-bold"
       v-else
     >
       My Dashboard
@@ -48,15 +44,18 @@
       class="ml-6 font-bold md:hidden"
       v-if="!useAuthStore().loggedIn"
     >
-    <font-awesome-icon :icon="['fas', 'arrow-right-to-bracket']" />
+      <font-awesome-icon :icon="['fas', 'arrow-right-to-bracket']" />
     </nuxt-link>
   </div>
 </template>
 
 <script>
 import { useAuthStore } from "~/stores/store.js";
-
+import Searchbar from "./Searchbar.vue";
 export default {
+  components: {
+    Searchbar,
+  },
   data() {
     return {
       terms: "",

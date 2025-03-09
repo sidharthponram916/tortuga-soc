@@ -1,12 +1,6 @@
 <template>
   <div>
-    <div
-      class="fixed right-0 left-0 top-20 p-1 text-center font-bold text-slate-100 bg-yellow-500"
-      v-if = "courses.length > 0"
-    >
-      {{ courses.length }} {{ useRoute().params.id }} Electives
-    </div>
-    <div class="p-10 m-4 mt-10 rounded" v-if="courses.length > 0">
+    <div class="p-10 m-4 rounded" v-if="courses.length > 0">
       <div
         v-for="course in courses"
         :key="course.id"

@@ -83,7 +83,7 @@ const html = (name: string, id: string, section_id: string) => {
 };
 
 const watchlistUpdates = async () => {
-  cron.schedule("*/5 * * * *", async () => {
+  cron.schedule("*/1 * * * *", async () => {
     try {
       const users = await User.find();
       for (let user of users) {
@@ -108,6 +108,8 @@ const watchlistUpdates = async () => {
             });
 
             if (c_info.open == 0) {
+              course.section.open = c_info.open;
+
               user.saved_courses.splice(course, 1);
 
               course["status"] = "Active";
@@ -120,7 +122,7 @@ const watchlistUpdates = async () => {
 
               sendEmail(
                 `${user.terpmail}`,
-                `[SECTION CLOSED NOTIFICATION] Hey, ${user.username}! ${
+                `Course Closed! Hey, ${user.username}! ${
                   course.course_id
                 } - ${
                   course.course_name

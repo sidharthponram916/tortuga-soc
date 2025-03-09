@@ -4,8 +4,7 @@
       <div class="w-3/4">
         <div class="text-3xl font-bold">My Fall 2025 Slingshots</div>
         <div class="text-sm mt-1">
-          Once a course from this list becomes open again, you will recieve an
-          email notification. List updates every five minutes.
+          This is your list of current and inactive watches. If a course opens up from closure, you will receive a notification on email with a link to Testudo to register for the course immediately. 
         </div>
       </div>
     </div>

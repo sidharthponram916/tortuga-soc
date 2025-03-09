@@ -9,7 +9,7 @@
         </h1>
       </div>
     </div>
-    <div class="p-10 m-4 rounded" v-else-if="courses.length > 0">
+    <div class="p-2 md:p-10 m-4 rounded" v-else-if="courses.length > 0">
       <div v-for="course in courses" :key="course.id" class="mb-16">
         <h1 class="text-5xl font-bold">
           {{ course.id }}
@@ -63,7 +63,53 @@
         </div>
         <div v-show="course.show_section || courses.length < 4">
           <div class="flex flex-row">
-            <div class="inline-flex items-center text-sm">
+            <div class="md:hidden text-xs">
+              <div class="m-1 text-xs text-slate-700 font-medium">
+                <b>{{ course.filtered_sections.length }}</b> lecture times
+                (including online) shown from
+              </div>
+              <select
+                class="outline-none text-slate-500 font-medium text-left"
+                v-model="course.selected_start_time"
+                @change="filterSections(course)"
+              >
+                <option value="8:00am">8:00am</option>
+                <option value="9:00am">9:00am</option>
+                <option value="10:00am">10:00am</option>
+                <option value="11:00am">11:00am</option>
+                <option value="12:00pm">12:00pm</option>
+                <option value="1:00pm">1:00pm</option>
+                <option value="2:00pm">2:00pm</option>
+                <option value="3:00pm">3:00pm</option>
+                <option value="4:00pm">4:00pm</option>
+                <option value="5:00pm">5:00pm</option>
+                <option value="6:00pm">6:00pm</option>
+                <option value="7:00pm">7:00pm</option>
+                <option value="8:00pm">8:00pm</option>
+              </select>
+              <span class="mx-2 text-slate-700 font-medium"> to </span>
+              <select
+                class="p-2 outline-none text-left font-medium text-slate-500"
+                v-model="course.selected_end_time"
+                @change="filterSections(course)"
+              >
+                <option value="8:00am">8:00am</option>
+                <option value="9:00am">9:00am</option>
+                <option value="10:00am">10:00am</option>
+                <option value="11:00am">11:00am</option>
+                <option value="12:00pm">12:00pm</option>
+                <option value="1:00pm">1:00pm</option>
+                <option value="2:00pm">2:00pm</option>
+                <option value="3:00pm">3:00pm</option>
+                <option value="4:00pm">4:00pm</option>
+                <option value="5:00pm">5:00pm</option>
+                <option value="6:00pm">6:00pm</option>
+                <option value="7:00pm">7:00pm</option>
+                <option value="8:00pm">8:00pm</option>
+                <option value="9:00pm">9:00pm</option>
+              </select>
+            </div>
+            <div class="hidden md:inline-flex items-center text-sm">
               <span class="m-1 text-slate-700 font-medium">
                 <b>{{ course.filtered_sections.length }}</b> lecture times
                 (including online) shown from
@@ -193,7 +239,7 @@
                 v-if="useAuthStore().user.user"
                 class="flex flex-row ml-auto mb-auto bg-slate-500 w-1/5"
               >
-                <div class="m-auto w-full flex flex-grid grid-rows-2">
+                <div class="hidden md:flex m-auto w-full flex-grid grid-rows-2">
                   <div
                     :class="
                       defineColor(100 - 100 * (section.open / section.total))
@@ -282,7 +328,7 @@
     </div>
     <div
       v-if="loading"
-      class="p-64 m-auto flex flex-col justify-center items-center h-full"
+      class="py-10 md:p-64 m-auto flex flex-col justify-center items-center h-full"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"

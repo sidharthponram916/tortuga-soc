@@ -1,73 +1,39 @@
 <template>
-  <div class="h-screen bg-yellow-500 flex flex-col items-center p-4">
-    <div class="text-center pt-16 text-slate-900 font-bold">
-      <img
-        src="../assets/images/turtle-shell.svg"
-        class="mb-6 mt-6 w-24 h-24 md:w-32 md:h-32 m-auto"
-      />
-      <div class = 'text-3xl md:hidden'> Welcome to Tortuga! </div>
-      <!-- Make text visible on mobile -->
-      <div class="hidden md:block text-3xl md:text-4xl mt-4">
-        {{ displayedText }}
-        <span class="ml-2 text-white">
-          <font-awesome-icon :icon="['fas', 'ellipsis-vertical']" />
-        </span>
-      </div>
-
-      <!-- Stack items on mobile, space them well -->
-      <div class="flex flex-wrap justify-center items-center mt-10 gap-3">
-        <div v-for="flag in flags" :key="flag">
-          <nuxt-link :to="'/general-education/classes/' + flag">
-            <div
-              class="px-4 py-2 bg-slate-200 hover:bg-slate-700 text-xs md:text-sm font-bold text-black hover:text-white rounded w-auto text-center"
-            >
-              {{ flag }}
-            </div>
-          </nuxt-link>
-        </div>
-      </div>
-      <div class="m-auto w-full">
-        <input
-          type="text"
-          @keyup.enter="redirect"
-          @input="filterSearch"
-          v-model="terms"
-          class="w-full md:w-2/3 min-w-0 p-3 mt-6 bg-slate-100 text-slate-800 outline-none shadow-md"
-          placeholder="Enter a search term (eg. bmgt, cmsc320, fsoc)..."
-        />
-
-        <div class="overflow-y-auto h-32 w-full md:w-2/3 m-auto text-left">
-          <div
-            class="p-2 text-left bg-slate-100 border-b-2 border-slate-200 text-sm break-words whitespace-normal"
-            v-for="course in filteredResults.slice(0, 5)"
-            :key="course.course_id"
-          >
-            <nuxt-link :to="'/classes/' + course.course_id">
-              <div class="text-slate-500">{{ course.course_id }}</div>
-              <div class="text-slate-700">{{ course.name }}</div>
-            </nuxt-link>
-          </div>
-        </div>
+  <div class="relative">
+    <input
+      type="text"
+      @keyup.enter="redirect"
+      @input="filterSearch"
+      v-model="terms"
+      class="bg-white p-2 text-slate-800 outline-none rounded mb-1"
+      placeholder="Search..."
+    />
+    <div
+      class="absolute left-0 w-full bg-slate-50 overflow-y-auto"
+      v-if="filteredResults.length > 0"
+    >
+      <div
+        v-for="course in filteredResults.slice(0, 3)"
+        :key="course.course_id"
+        class = 'border-b-2 p-2 font-bold'
+      >
+        <a :href="'/classes/' + course.course_id">
+          <div class="text-slate-500 text-xs font-bold">{{ course.course_id }}</div>
+          <div class="text-slate-500 text-xs font-medium">{{ course.name }}</div>
+        </a>
       </div>
     </div>
   </div>
 </template>
+
 <script>
 import axios from "axios";
-
-definePageMeta({
-  middleware: ["auth"],
-});
 
 export default {
   data() {
     return {
-      text: "Streamlining the Schedule of Classes at UMD. ",
-      displayedText: "",
-      index: 0,
       courses: [],
       terms: "",
-      results: [],
       filteredResults: [],
       flags: [
         "FSAW",
@@ -319,25 +285,8 @@ export default {
     ];
 
     this.courses = this.courses.concat(gen_eds);
-
-    this.startTypingEffect();
   },
   methods: {
-    startTypingEffect() {
-      this.displayedText = "";
-      this.index = 0;
-
-      const interval = setInterval(() => {
-        if (this.index < this.text.length) {
-          this.displayedText += this.text[this.index];
-          this.index++;
-        } else {
-          clearInterval(interval);
-
-          setTimeout(this.startTypingEffect, 5000);
-        }
-      }, 50);
-    },
     filterSearch() {
       if (!this.terms.trim()) {
         this.filteredResults = [];
