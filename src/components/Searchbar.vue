@@ -5,7 +5,7 @@
       @keyup.enter="redirect"
       @input="filterSearch"
       v-model="terms"
-      class="bg-white p-2 text-slate-800 outline-none rounded mb-1"
+      class="bg-white p-2 text-slate-800 outline-none font-semibold rounded mb-1"
       placeholder="Search..."
     />
     <div
