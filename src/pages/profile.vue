@@ -82,10 +82,10 @@
         </nuxt-link>
       </div>
       <div
-        v-if="this.message != ''"
+        v-if="message != ''"
         class="text-red-500 px-4 text-sm pt-3 text-center"
       >
-        {{ this.message }}
+        {{ message }}
       </div>
     </div>
   </div>
@@ -116,9 +116,14 @@ export default {
   },
   mounted() {
     const authStore = useAuthStore();
-    this.user = authStore.user.user;
-    if (this.user.major == "Not Set") {
-      this.user.major = "";
+
+    if (authStore.user && authStore.user.user) {
+      this.user = { ...authStore.user.user };
+      if (this.user.major === "Not Set") {
+        this.user.major = "";
+      }
+    } else {
+      console.error("authStore.user.user is undefined!");
     }
   },
   methods: {
@@ -128,6 +133,9 @@ export default {
         location.replace("/my-tools/dashboard");
       } catch (e) {
         console.log(e.message);
+        this.message =
+          e.response?.data?.message ||
+          "An error occurred while updating your profile.";
       }
     },
   },
