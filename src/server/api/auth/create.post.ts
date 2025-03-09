@@ -9,19 +9,19 @@ export default defineEventHandler(async (event) => {
 
     const isUser = await User.findOne({ terpmail: body.terpmail });
     if (isUser)
-      return {
+      return createError({
         statusCode: 400,
         message:
           "That email already exists within our records. Please choose something different.",
-      };
+      });
 
     const usernameRepeat = await User.findOne({ username: body.username });
     if (usernameRepeat)
-      return {
+      return createError({
         statusCode: 400,
         message:
           "That username already exists within our records. Please choose something different.",
-      };
+      });
 
     const user = await User.create({
       ...body,
@@ -118,6 +118,6 @@ export default defineEventHandler(async (event) => {
 
     return rest;
   } catch (e: any) {
-    return { message: e.message };
+    return createError({ statusCode: 500, statusMessage: e.message });
   }
 });

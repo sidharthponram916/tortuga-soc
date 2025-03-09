@@ -7,18 +7,18 @@ export default defineEventHandler(async (event) => {
     const body: any = await readBody(event);
     const user = await User.findOne({ terpmail: body.terpmail });
     if (!user)
-      return {
+      return createError({
         statusCode: 404,
         statusMessage: "This user was not found.",
-      };
+      });
 
     const matches = await bcrypt.compare(body.password, user.password);
 
     if (!matches)
-      return {
+      return createError({
         statusCode: 401,
         statusMessage: "You entered invalid credentials. Please try again.",
-      };
+      });
 
     const { password, ...rest } = user.toObject();
 
@@ -40,6 +40,6 @@ export default defineEventHandler(async (event) => {
 
     return rest;
   } catch (e: any) {
-    return { statusCode: 500, statusMessage: e.message };
+    return createError({ statusCode: 500, statusMessage: e.message });
   }
 });
