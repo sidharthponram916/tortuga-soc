@@ -8,12 +8,21 @@ export default defineNuxtConfig({
     "~/assets/css/main.css",
     "@fortawesome/fontawesome-svg-core/styles.css",
   ],
+  nitro: {
+    plugins: ["~/server/index.ts"],
+  },
   gtag: {
     id: "G-2SNMH20JBD",
+  },
+  runtimeConfig: {
+    dbURI: process.env.DB_URI,
+    salt: process.env.SALT,
+    key: process.env.JWT_KEY,
+    frontendURL: process.env.FRONTEND_URL
   },
   vite: {
     plugins: [tailwindcss()],
   },
 
-  modules: ["nuxt-gtag"],
+  modules: ["nuxt-gtag", "@pinia/nuxt"],
 });
