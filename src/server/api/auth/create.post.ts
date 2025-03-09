@@ -9,19 +9,19 @@ export default defineEventHandler(async (event) => {
 
     const isUser = await User.findOne({ terpmail: body.terpmail });
     if (isUser)
-      throw createError({
+      return {
         statusCode: 400,
         message:
           "That email already exists within our records. Please choose something different.",
-      });
+      };
 
     const usernameRepeat = await User.findOne({ username: body.username });
     if (usernameRepeat)
-      throw createError({
+      return {
         statusCode: 400,
         message:
           "That username already exists within our records. Please choose something different.",
-      });
+      };
 
     const user = await User.create({
       ...body,

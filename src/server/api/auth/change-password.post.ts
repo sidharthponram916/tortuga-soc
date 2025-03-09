@@ -9,10 +9,10 @@ export default defineEventHandler(async (event) => {
     const user = await User.findById(body.id);
 
     if (!user)
-      throw createError({
+      return {
         statusCode: 404,
         statusMessage: "This is an invalid link.",
-      });
+      };
 
     const token = await EmailToken.findOne({
       userId: user._id,
@@ -20,10 +20,10 @@ export default defineEventHandler(async (event) => {
     });
 
     if (!token)
-      throw createError({
+      return {
         statusCode: 404,
         statusMessage: "The token used has been found to be invalid.",
-      });
+      };
 
     await User.findByIdAndUpdate(user._id, {
       password: await bcrypt.hash(
@@ -36,9 +36,9 @@ export default defineEventHandler(async (event) => {
 
     return user;
   } catch (e: any) {
-    throw createError({
+    return {
       statusCode: 500,
       statusMessage: e.message,
-    });
+    };
   }
 });

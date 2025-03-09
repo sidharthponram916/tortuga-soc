@@ -17,6 +17,6 @@ export default defineEventHandler(async (event) => {
     return user;
   } catch (e: any) {
     console.log(e.message);
-    throw createError({ statusCode: 500, message: e.message });
+    return { statusCode: 500, message: e.message };
   }
 });

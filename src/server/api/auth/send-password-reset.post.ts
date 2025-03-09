@@ -10,18 +10,18 @@ export default defineEventHandler(async (event) => {
     let user = await User.findOne({ terpmail: body.terpmail });
 
     if (!user)
-      throw createError({
+      return {
         statusCode: 404,
         message: "That user is not associated with a Tortuga Account.",
-      });
+      };
 
     const existingToken = await EmailToken.findOne({ userId: user.id });
 
     if (existingToken)
-      throw createError({
+      return {
         statusCode: 401,
         message: "A password reset email has already been sent!",
-      });
+      };
 
     const token = await EmailToken.create({
       userId: user._id,
@@ -101,6 +101,6 @@ export default defineEventHandler(async (event) => {
 
     sendEmail(`${body.terpmail}`, `Reset your password.`, html);
   } catch (e: any) {
-    throw createError({ statusCode: 500, message: e });
+    return { statusCode: 500, message: e };
   }
 });
