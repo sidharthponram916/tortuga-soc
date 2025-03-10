@@ -3,7 +3,7 @@
     <div v-if="error">
       <div class="p-56 text-center m-2 text-3xl font-bold">
         <div class="text-8xl text-slate-500">404</div>
-        We are sorry, but that entry cannot be found.
+        That entry cannot be found.
         <h1 class="text-xl font-medium mb-5">
           Try searching for something else on the top-right.
         </h1>
