@@ -15,11 +15,15 @@
       <div
         v-for="course in filteredResults.slice(0, 3)"
         :key="course.course_id"
-        class = 'border-b-2 p-2 font-bold'
+        class="border-b-2 p-2 font-bold"
       >
         <a :href="'/classes/' + course.course_id">
-          <div class="text-slate-500 text-xs font-bold">{{ course.course_id }}</div>
-          <div class="text-slate-500 text-xs font-medium">{{ course.name }}</div>
+          <div class="text-slate-500 text-xs font-bold">
+            {{ course.course_id }}
+          </div>
+          <div class="text-slate-500 text-xs font-medium">
+            {{ course.name }}
+          </div>
         </a>
       </div>
     </div>
@@ -303,10 +307,15 @@ export default {
       });
     },
     redirect() {
+      const regex = /^[a-zA-Z]{4}[0-9][0-9]?$/;
+
+      console.log(regex.test(this.terms));
       if (this.flags.includes(this.terms.toUpperCase())) {
         location.replace(
           `  /general-education/classes/${this.terms.toUpperCase()}`
         );
+      } else if (regex.test(this.terms)) {
+        location.replace(`/classes/${this.terms.toUpperCase()}`);
       } else if (this.courseCodes.includes(this.terms.toUpperCase().trim(""))) {
         location.replace(`/classes/${this.terms.toUpperCase()}`);
       } else {
