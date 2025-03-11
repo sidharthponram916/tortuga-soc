@@ -17,15 +17,14 @@ import axios from "axios";
 useHead({
   title: "Tortuga SOC",
   meta: [
-    { property: "og:title", content: "Tortuga" },
     {
-      property: "og:description",
-      content: "Make the most out of the Schedule of Classes.",
+      hid: "description", // `hid` helps prevent duplicate meta tags
+      name: "description",
+      content:
+        "Find and plan your UMD courses easily with Tortuga, a fast and user-friendly alternative to UMD Schedule of Classes.",
     },
-    { name: "theme-color", content: "#a81b1b" },
   ],
 });
-
 
 export default {
   components: {
