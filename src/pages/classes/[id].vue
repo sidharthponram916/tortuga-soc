@@ -175,7 +175,15 @@
                   >
                 </div>
                 <div class="text-sm text-slate-700 font-bold">
-                  {{ section.instructors[0].name }}
+                  <a
+                    :href="
+                      'https://planetterp.com/professor/' +
+                      section.instructors[0].slug
+                    "
+                    target="_blank"
+                  >
+                    {{ section.instructors[0].name }}
+                  </a>
                 </div>
                 <div class="w-full">
                   <a
