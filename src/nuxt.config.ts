@@ -7,7 +7,31 @@ export default defineNuxtConfig({
   app: {
     head: {
       meta: [
-        { name: "google-site-verification", content: "Avs-LJTludUHd3T0xtnwvS7LGliGie7zan7vIJkluhc" },
+        {
+          name: "google-site-verification",
+          content: "Avs-LJTludUHd3T0xtnwvS7LGliGie7zan7vIJkluhc",
+        },
+        { property: "og:title", content: "Tortuga SOC" },
+        {
+          property: "og:description",
+          content: "UMD's Enhanced Schedule of Classes",
+        },
+        {
+          property: "og:image",
+          content: "https://example.com/preview-image.jpg",
+        },
+        { property: "og:url", content: "https://example.com/" },
+        { property: "og:type", content: "website" },
+        { name: "twitter:card", content: "summary_large_image" },
+        { name: "twitter:title", content: "Tortuga SOC" },
+        {
+          name: "twitter:description",
+          content: "UMD's Enhanced Schedule of Classes",
+        },
+        {
+          name: "twitter:image",
+          content: "https://example.com/preview-image.jpg",
+        },
       ],
     },
   },
