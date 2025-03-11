@@ -18,11 +18,12 @@ export default defineNuxtConfig({
         },
         {
           property: "og:image",
-          content: "https://example.com/preview-image.jpg",
+          content: "https://tortugasoc.com/preview.png",
         },
-        { property: "og:url", content: "https://example.com/" },
+        { property: "og:url", content: "https://tortugasoc.com/" },
         { property: "og:type", content: "website" },
         { name: "twitter:card", content: "summary_large_image" },
+        { name: "theme-color", content: "#E21833" },
         { name: "twitter:title", content: "Tortuga SOC" },
         {
           name: "twitter:description",
@@ -30,7 +31,7 @@ export default defineNuxtConfig({
         },
         {
           name: "twitter:image",
-          content: "https://example.com/preview-image.jpg",
+          content: "https://tortugasoc.com/preview.png",
         },
       ],
     },
