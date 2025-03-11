@@ -176,6 +176,10 @@
                 </div>
                 <div class="text-sm text-slate-700 font-bold">
                   <a
+                    v-if="
+                      section.instructors[0].rating &&
+                      section.instructors[0].rating != 'N/A'
+                    "
                     :href="
                       'https://planetterp.com/professor/' +
                       section.instructors[0].slug
@@ -184,6 +188,7 @@
                   >
                     {{ section.instructors[0].name }}
                   </a>
+                  <span v-else> {{ section.instructors[0].name }}</span>
                 </div>
                 <div class="w-full">
                   <a
