@@ -14,7 +14,8 @@ export default defineNuxtConfig({
         { property: "og:title", content: "Tortuga SOC" },
         {
           property: "og:description",
-          content: "UMD's Enhanced Schedule of Classes",
+          content:
+            "Enhanced UMD Schedule of Classes, with an intuitive interface, course availability notifications, and more",
         },
         {
           property: "og:image",
