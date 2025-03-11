@@ -28,7 +28,7 @@ export default defineNuxtConfig({
         { name: "twitter:title", content: "Tortuga SOC" },
         {
           name: "twitter:description",
-          content: "UMD's Enhanced Schedule of Classes",
+          content: "Enhanced course catalog at the University of Maryland, with an intuitive interface, course availability notifications, and more.",
         },
         {
           name: "twitter:image",
