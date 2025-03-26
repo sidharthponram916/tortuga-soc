@@ -26,6 +26,7 @@
     "nodemailer": "^6.10.0",
     "nuxt": "^3.15.4",
     "nuxt-gtag": "^3.0.2",
+    "nuxt-vue3-google-signin": "^0.0.11",
     "postcss": "^8.5.3",
     "tailwindcss": "^4.0.8",
     "uuid": "^11.1.0",

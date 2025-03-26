@@ -44,7 +44,7 @@
       </div>
       <div class="px-4 pt-5 text-sm text-center">
         By making an account, you confirm that you have read our
-        <nuxt-link class="text-blue-600 font-semibold" to="/auth/password-reset"
+        <nuxt-link class="text-blue-600 font-semibold" to="/info/privacy-policy"
           >privacy policy</nuxt-link
         >.
       </div>
