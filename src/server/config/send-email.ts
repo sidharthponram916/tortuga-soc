@@ -22,7 +22,7 @@ const sendEmail = async function (
     html: `${text}`,
   });
 
-  console.log("Email Sent Successfully!");
+  console.log("Email Pushed Successfully!");
 };
 
 export default sendEmail;
