@@ -10,7 +10,7 @@ export default async (_nitroApp: Nitro) => {
     // Run both cron jobs
     watchlistUpdates();
     slingshotUpdates();
-    console.log("Connected to MongoDB server!");
+    console.log("Connected to database server!");
   } catch (e) {
     console.error(e);
   }
