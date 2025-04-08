@@ -72,7 +72,7 @@ export default {
     async authenticate() {
       try {
         if (!this.user.terpmail || !this.user.password) {
-          this.message = "Please fill out all fields in the form.";
+          this.message = "Please fill out all fields.";
         } else {
           let user = await axios.post(`/api/auth/sign-in`, {
             terpmail: this.user.terpmail,
