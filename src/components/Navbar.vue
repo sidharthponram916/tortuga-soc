@@ -22,8 +22,11 @@
     <nuxt-link to="/my-tools/slingshot" class="hidden md:block ml-10 text-xs">
       <b class="text-base">Section Slingshot</b></nuxt-link
     >
-    <div class = 'ml-auto relative'>
-    <Searchbar />
+    <nuxt-link class="hidden md:block ml-10" to="/info/faq">
+      <b>FAQ</b>
+    </nuxt-link>
+    <div class="ml-auto relative">
+      <Searchbar />
     </div>
     <nuxt-link
       to="/auth/register"
