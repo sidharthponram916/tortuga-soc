@@ -6,13 +6,13 @@
       </div>
       <div class="text-center">Last Updated: 04.07.25</div>
 
-      <div class="mt-5">
+      <div class="mt-2">
         <div v-for="set in faq" :key="set.question">
           <div class="border-b-2 border-slate-200 pt-5 pb-5">
             <div class="font-bold text-2xl text-slate-700 mb-1">
               {{ set.question }}
             </div>
-            <div class="font-medium text-slate-500">{{ set.answer }}</div>
+            <div class="mt-3 font-medium text-slate-500">{{ set.answer }}</div>
           </div>
         </div>
       </div>
@@ -39,12 +39,23 @@ export default {
           question:
             "What is the point of Section Slingshot if a waitlist system exists?",
           answer:
-            "While you can waitlist a course at UMD through the system, there is a small window between a course closure and waitlist, where a spot opens up and nobody would ever know. Section Slingshot can easily notify users of this and can enable users to register for that course fast. There are also certain situations where you cannot be on a courses' waitlist or a waitlist isn't available for a course at all, which is where Section Slingshot can come into play. ",
+            "While UMD’s system allows students to join a course waitlist, there’s often a hidden window—between a course closing and the waitlist activating—where seats briefly open up and go unnoticed. Section Slingshot is designed to catch those fleeting opportunities and notify students instantly, giving them a real shot at registering. \n This is especially powerful during the add/drop period, when students frequently shuffle their schedules and seats open up unexpectedly. In some cases, courses don’t offer a waitlist at all or students aren’t eligible to join it—making Section Slingshot the only way to stay informed and act fast.",
         },
         {
           question: "Is the data from Tortuga SOC accurate?",
           answer:
             "Yes, we pull data directly from the UMD Schedule of Classes page, delivered to you in a streamlined and clean interface.",
+        },
+        {
+          question: "Why isn't Tortuga open source?",
+          answer:
+            "Tortuga isn’t open source because I want to protect the platform’s integrity and avoid low-effort clones. Making the codebase public could lead to copycat sites that dilute the experience and trust I’ve worked to build. While the source code isn’t public, I’m always open to feedback, feature suggestions, and collaboration — feel free to reach out!",
+        },
+        {
+          question:
+            "If it's not open source, how can I trust that Tortuga is secure?",
+          answer:
+            "Even though Tortuga is closed source, security and transparency are top priorities. Read more about this in our privacy policy.",
         },
         {
           question: "When will the rest of the features be finished?",
