@@ -81,7 +81,7 @@ const html = (name: string, id: string, section: string) => {
 };
 
 const slingshotUpdates = async () => {
-  cron.schedule("*/4 * * * *", async () => {
+  cron.schedule("*/5 * * * *", async () => {
     try {
       const users = await User.find();
       for (let user of users) {
