@@ -10,7 +10,7 @@ interface Section {
 
 const html = (name: string, id: string, section: string) => {
   return ` <!DOCTYPE html>
-<html lang="en">
+<html lang="en">a
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -81,7 +81,7 @@ const html = (name: string, id: string, section: string) => {
 };
 
 const slingshotUpdates = async () => {
-  cron.schedule("*/5 * * * *", async () => {
+  cron.schedule("*/1 * * * *", async () => {
     try {
       const users = await User.find();
       for (let user of users) {

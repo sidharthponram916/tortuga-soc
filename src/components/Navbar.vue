@@ -54,7 +54,10 @@
 
 <script>
 import { useAuthStore } from "~/stores/store.js";
+import axios from "axios";
 import Searchbar from "./Searchbar.vue";
+
+
 export default {
   components: {
     Searchbar,
@@ -79,7 +82,10 @@ export default {
       ],
     };
   },
-  mounted() {},
+  async mounted() {
+    let courses = await axios.get("https://api.umd.io/v1/courses/list");
+    localStorage.setItem("courses", JSON.stringify(courses));
+  },
   methods: {
     redirect() {
       if (this.flags.includes(this.terms.toUpperCase())) {

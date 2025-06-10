@@ -1,30 +1,35 @@
 <template>
-  <div class="relative">
-    <input
-      type="text"
-      @keyup.enter="redirect"
-      @input="filterSearch"
-      v-model="terms"
-      class="bg-white p-2 text-slate-800 outline-none font-semibold rounded mb-1"
-      placeholder="Search..."
-    />
-    <div
-      class="absolute left-0 w-full bg-slate-50 overflow-y-auto"
-      v-if="filteredResults.length > 0"
-    >
+  <div
+    class="relative bg-white p-2 text-slate-800 outline-none font-semibold rounded mb-1 border-2 border-slate-200"
+  >
+    <div class="flex gap-2 justify-center items-center">
+      <font-awesome-icon :icon="['fas', 'magnifying-glass']" class = 'text-slate-500' />
+      <input
+        type="text"
+        @keyup.enter="redirect"
+        @input="filterSearch"
+        class = "outline-none"
+        v-model="terms"
+        placeholder="Search..."
+      />
       <div
-        v-for="course in filteredResults.slice(0, 3)"
-        :key="course.course_id"
-        class="border-b-2 p-2 font-bold"
+        class="absolute top-11 w-full bg-slate-50 overflow-y-auto max-h-72"
+        v-if="filteredResults.length > 0"
       >
-        <a :href="'/classes/' + course.course_id">
-          <div class="text-slate-500 text-xs font-bold">
-            {{ course.course_id }}
-          </div>
-          <div class="text-slate-500 text-xs font-medium">
-            {{ course.name }}
-          </div>
-        </a>
+        <div
+          v-for="course in filteredResults.slice(0, 10)"
+          :key="course.course_id"
+          class="border-b-2 border-slate-300 p-2 font-bold"
+        >
+          <a :href="'/classes/' + course.course_id">
+            <div class="text-slate-500 text-xs font-bold">
+              {{ course.course_id }}
+            </div>
+            <div class="text-slate-500 text-xs font-medium">
+              {{ course.name }}
+            </div>
+          </a>
+        </div>
       </div>
     </div>
   </div>
