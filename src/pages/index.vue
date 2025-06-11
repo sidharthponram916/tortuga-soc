@@ -5,7 +5,7 @@
         src="../assets/images/turtle-shell.svg"
         class="mb-6 mt-6 w-24 h-24 md:w-32 md:h-32 m-auto"
       />
-      <div class = 'text-3xl md:hidden'> Welcome to Tortuga! </div>
+      <div class="text-3xl md:hidden">Welcome to Tortuga!</div>
       <!-- Make text visible on mobile -->
       <div class="hidden md:block text-3xl md:text-4xl mt-4">
         {{ displayedText }}
@@ -354,15 +354,9 @@ export default {
       });
     },
     redirect() {
-      if (this.flags.includes(this.terms.toUpperCase())) {
-        location.replace(
-          `  /general-education/classes/${this.terms.toUpperCase()}`
-        );
-      } else if (this.courseCodes.includes(this.terms.toUpperCase().trim(""))) {
-        location.replace(`/classes/${this.terms.toUpperCase()}`);
-      } else {
-        location.replace(`/classes/${this.filteredResults[0].course_id}`);
-      }
+      location.replace(
+        `/classes/${this.filteredResults[0].course_id}?terms=${this.filteredResults[0].course_id}`
+      );
     },
   },
 };

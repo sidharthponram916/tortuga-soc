@@ -1,5 +1,11 @@
 <template>
   <div
+    v-if="error"
+    class="w-3/4 max-h-[83vh] m-auto flex flex-col justify-center items-center h-full"
+  >
+    This course is not available this semester!
+  </div>
+  <div
     v-if="loading"
     class="w-3/4 max-h-[80vh] m-auto flex flex-col justify-center items-center h-full"
   >
@@ -26,10 +32,14 @@
     </svg>
   </div>
   <div
-    v-else
-    class="w-3/4 max-h-[80vh] overflow-y-auto border-r-2 border-y-2 border-slate-200"
+    v-else-if="!loading && !error"
+    class="w-3/4 max-h-[83vh] overflow-y-auto border-r-2 border-y-2 border-slate-200"
   >
-    <div v-for="course in courses" :key="course.id" class="mb-16 p-4 m-4">
+    <div
+      v-for="course in courses"
+      :key="course.id"
+      class="mb-16 p-4 m-4"
+    >
       <h1 class="text-5xl font-bold">{{ course.id }}</h1>
       <h1 class="text-lg mx-1 font-bold text-slate-700">
         {{ course.title }},
@@ -49,7 +59,7 @@
           <span v-else-if="gpa >= 2.0"> C </span>
           <span v-else-if="gpa >= 2.0"> C- </span>
 
-          <span class="text-xs"> {{ gpa.toFixed(3) }} </span>
+          <span v-if="gpa" class="text-xs"> {{ gpa.toFixed(3) }} </span>
         </span>
         <span
           v-for="flag in course.flags"
@@ -394,7 +404,7 @@ export default {
 
         this.gpa = gpaRes.data.average_gpa;
 
-        console.log(this.gpa)
+        console.log(this.gpa);
 
         if (data.length == 0) {
           this.error = true;
@@ -406,7 +416,7 @@ export default {
             selected_end_time: "9:00pm",
           }));
 
-          this.courses = data;
+          this.courses = [data[0]];
 
           this.getInstructorRatings();
         }
@@ -647,6 +657,8 @@ export default {
     async getInstructorRatings() {
       let instructors = new Set();
 
+      console.log(instructors);
+
       this.courses.forEach((course) => {
         course.sections.forEach((section) => {
           if (section.instructors.length > 0) {
@@ -676,8 +688,10 @@ export default {
               };
             }
           } catch (e) {
-            console.log(e);
-            instructorRatings[instructor] = "N/A";
+            instructorRatings[instructor] = {
+              rating: "N/A",
+              slug: "N/A",
+            };
           }
         })
       );
@@ -693,6 +707,7 @@ export default {
           }
         });
       });
+
     },
   },
 };

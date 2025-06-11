@@ -1,7 +1,7 @@
 <template>
   <div>
     <transition name="fade">
-      <div class="">
+      <div class="m-2">
         <div v-if="error">
           <div class="p-56 text-center m-2 text-3xl font-bold">
             <div class="text-8xl text-slate-500">404</div>
@@ -26,18 +26,22 @@
                 />
                 <input
                   type="text"
-                  @keyup.enter="redirect"
                   v-model="terms"
                   class="ml-2 outline-none"
                   @input="filterSearch"
-                  placeholder="Search..."
+                  placeholder="Search a course..."
                 />
+              </div>
+              <div class="text-xs mt-5">
+                The filters below are currently under development but are here
+                for you as an idea of what it would look like on the site.
               </div>
               <div class="font-bold text-slate-500 mt-5 text-sm">
                 General Education
               </div>
               <select
-                class="p-2 border-2 border-slate-200 bg-white w-full outline-none text-sm mt-2"
+                class="p-2 border-2 border-slate-200 bg-white w-full outline-none text-sm mt-2 disabled:bg-gray-100"
+                disabled
               >
                 <option>Academic Writing (FSAW)</option>
                 <option>Analytical Reasoning (FSAR)</option>
@@ -57,7 +61,8 @@
                 Department
               </div>
               <select
-                class="p-2 border-2 border-slate-200 bg-white w-full outline-none text-sm mt-2"
+                class="p-2 border-2 border-slate-200 bg-white w-full outline-none text-sm mt-2 disabled:bg-gray-100"
+                disabled
               >
                 <option>All Courses</option>
                 <option value="ANSC">Animal Science (ANSC)</option>
@@ -411,7 +416,8 @@
               </select>
               <div class="font-bold text-slate-500 mt-5 text-sm">Credits</div>
               <select
-                class="p-2 border-2 border-slate-200 w-full bg-white outline-none text-sm mt-2"
+                class="p-2 border-2 border-slate-200 w-full bg-white outline-none text-sm mt-2 disabled:bg-gray-100"
+                disabled
               >
                 <option>All Credits</option>
                 <option>1 Credits</option>
@@ -423,7 +429,8 @@
                 Semester Catalog
               </div>
               <select
-                class="p-2 border-2 border-slate-200 w-full bg-white outline-none text-sm mt-2"
+                class="p-2 border-2 border-slate-200 w-full bg-white outline-none text-sm mt-2 disabled:bg-gray-100"
+                disabled
               >
                 <option>Fall 2025</option>
                 <option>Summer 2025</option>
@@ -432,7 +439,7 @@
               </select>
             </div>
             <div
-              class="w-1/4 mt-3 bg-white border-r-2 border-slate-200"
+              class="w-1/4 mt-3 bg-white border-b-2 border-slate-200"
             >
               <div class="text-center mt-1 border-slate-200 pb-2">
                 <b class="text-xl text-slate-500">{{
@@ -440,9 +447,9 @@
                 }}</b>
                 Results
               </div>
-              <div class="h-[70vh] overflow-y-auto">
+              <div class="h-[72vh] overflow-y-auto">
                 <div
-                  @click="changeCourses(course.course_id)"
+                  @click="changeCourses(course)"
                   v-for="course in filteredResults"
                   :key="course.course_id"
                 >
@@ -459,7 +466,7 @@
             </div>
             <CourseCard :courseName="current_course" :key="courseKey" />
           </div>
-          <img
+          <!-- <img
             src="@/assets/images/logos-formal-seal.webp"
             class="w-10 m-auto mb-2 mt-5"
           />
@@ -468,7 +475,7 @@
             <nuxt-link to="https://app.testudo.umd.edu/soc/">
               https://app.testudo.umd.edu/soc
             </nuxt-link>
-          </div>
+          </div> -->
         </div>
         <div
           v-if="loading"
@@ -747,27 +754,7 @@ export default defineComponent({
   async mounted() {
     try {
       this.current_course = this.$route.params.id;
-
-      let { data } = await axios.get(
-        `https://schedule-of-classes-api.vercel.app/api/get-courses?name=${
-          useRoute().params.id
-        }`
-      );
-
-      if (data.length == 0) {
-        this.error = true;
-      } else {
-        data = data.map((course) => ({
-          ...course,
-          selected_start_time: "8:00am",
-          filtered_sections: course.sections,
-          selected_end_time: "9:00pm",
-        }));
-
-        this.courses = data;
-
-        this.getInstructorRatings();
-      }
+      this.courseKey++;
 
       let courses = JSON.parse(localStorage.getItem("courses"));
       this.all_courses = courses.data;
@@ -817,16 +804,16 @@ export default defineComponent({
       }
     } catch (e) {
       this.error = true;
-      console.log(e.message);
+      console.log("Error: " + e.message);
     } finally {
       this.loading = false;
     }
   },
   methods: {
-    changeCourses(name) {
-      console.log(name);
-      this.current_course = name;
+    changeCourses(course) {
+      this.current_course = course.course_id;
       this.courseKey++;
+      document.title = `${course.course_id} - ${course.name} Overview - Tortuga SOC`;
     },
     filterSearch() {
       console.log(this.terms);
@@ -876,6 +863,8 @@ export default defineComponent({
       });
 
       let instructorRatings = {};
+
+      console.log("Trying to find!");
 
       await Promise.all(
         [...instructors].map(async (instructor) => {

@@ -3,12 +3,15 @@
     class="relative bg-white p-2 text-slate-800 outline-none font-semibold rounded mb-1 border-2 border-slate-200"
   >
     <div class="flex gap-2 justify-center items-center">
-      <font-awesome-icon :icon="['fas', 'magnifying-glass']" class = 'text-slate-500' />
+      <font-awesome-icon
+        :icon="['fas', 'magnifying-glass']"
+        class="text-slate-500"
+      />
       <input
         type="text"
         @keyup.enter="redirect"
         @input="filterSearch"
-        class = "outline-none"
+        class="outline-none"
         v-model="terms"
         placeholder="Search..."
       />
@@ -312,20 +315,11 @@ export default {
       });
     },
     redirect() {
-      const regex = /^[a-zA-Z]{4}[0-9][0-9]?$/;
-
-      console.log(regex.test(this.terms));
-      if (this.flags.includes(this.terms.toUpperCase())) {
-        location.replace(
-          `  /general-education/classes/${this.terms.toUpperCase()}`
-        );
-      } else if (regex.test(this.terms)) {
-        location.replace(`/classes/${this.terms.toUpperCase()}`);
-      } else if (this.courseCodes.includes(this.terms.toUpperCase().trim(""))) {
-        location.replace(`/classes/${this.terms.toUpperCase()}`);
-      } else {
-        location.replace(`/classes/${this.filteredResults[0].course_id}`);
-      }
+      location.replace(
+        `/classes/${
+          this.filteredResults[0].course_id
+        }?terms=${this.terms.toUpperCase()}`
+      );
     },
   },
 };
