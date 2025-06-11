@@ -7,7 +7,7 @@
         <img src="../assets/images/turtle.png" class="w-10 rounded-full" />
         <div class="hidden md:flex md:flex-col">
           <div class="text-xl font-bold text-slate-100">
-            Tortuga <span class="text-sm text-red-400">v1.0</span>
+            Tortuga <span class="text-sm text-red-400">v2.1</span>
           </div>
           <div class="text-sm text-slate-100">
             <font-awesome-icon :icon="['fas', 'location-dot']" /> University of
@@ -56,7 +56,6 @@
 import { useAuthStore } from "~/stores/store.js";
 import axios from "axios";
 import Searchbar from "./Searchbar.vue";
-
 
 export default {
   components: {
