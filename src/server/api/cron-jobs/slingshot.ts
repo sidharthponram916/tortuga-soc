@@ -1,0 +1,19 @@
+import slingshotUpdates from "~/server/config/cron-jobs/slingshot";
+
+export default defineEventHandler(async (event) => {
+  const apiKey = getHeader(event, "x-api-key");
+
+  try {
+    if (apiKey !== useRuntimeConfig().eventbridgeURI) {
+      return {
+        statusCode: 401,
+        statusMessage: "Unauthorized Request.",
+      };
+    } else {
+      slingshotUpdates();
+      return { statusCode: 200, message: "Cron successfully executed!" };
+    }
+  } catch (e) {
+    console.log({ statusCode: 500, message: "There was an error" });
+  }
+});

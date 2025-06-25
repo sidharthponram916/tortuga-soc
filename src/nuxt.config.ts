@@ -52,6 +52,7 @@ export default defineNuxtConfig({
     dbURI: process.env.DB_URI,
     salt: process.env.SALT,
     key: process.env.JWT_KEY,
+    eventbridgeURI: process.env.EVENTBRIDGE_SECRET,
     frontendURL: process.env.FRONTEND_URL,
   },
   vite: {

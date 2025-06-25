@@ -35,11 +35,7 @@
     v-else-if="!loading && !error"
     class="w-3/4 max-h-[83vh] overflow-y-auto border-r-2 border-y-2 border-slate-200"
   >
-    <div
-      v-for="course in courses"
-      :key="course.id"
-      class="mb-16 p-4 m-4"
-    >
+    <div v-for="course in courses" :key="course.id" class="mb-16 p-4 m-4">
       <h1 class="text-5xl font-bold">{{ course.id }}</h1>
       <h1 class="text-lg mx-1 font-bold text-slate-700">
         {{ course.title }},
@@ -49,6 +45,7 @@
         <span
           class="p-1 mx-1 mt-1 text-sm text-white font-semibold rounded"
           :class="defineGPAColor(gpa)"
+          v-if="gpa"
         >
           <span v-if="gpa >= 3.7"> A- </span>
           <span v-else-if="gpa >= 3.7"> A- </span>
@@ -59,7 +56,7 @@
           <span v-else-if="gpa >= 2.0"> C </span>
           <span v-else-if="gpa >= 2.0"> C- </span>
 
-          <span v-if="gpa" class="text-xs"> {{ gpa.toFixed(3) }} </span>
+          <span class="text-xs"> {{ gpa.toFixed(3) }} </span>
         </span>
         <span
           v-for="flag in course.flags"
@@ -707,7 +704,6 @@ export default {
           }
         });
       });
-
     },
   },
 };

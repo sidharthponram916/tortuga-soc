@@ -355,7 +355,9 @@ export default {
     },
     redirect() {
       location.replace(
-        `/classes/${this.filteredResults[0].course_id}?terms=${this.filteredResults[0].course_id}`
+        `/classes/${
+          this.filteredResults[0].course_id
+        }?terms=${this.terms.toUpperCase()}`
       );
     },
   },

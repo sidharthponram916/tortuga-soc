@@ -1,4 +1,3 @@
-import cron from "node-cron";
 import User from "../../models/user.model";
 import sendEmail from "../send-email";
 import axios from "axios";
@@ -81,76 +80,72 @@ const html = (name: string, id: string, section: string) => {
 };
 
 const slingshotUpdates = async () => {
-  cron.schedule("*/1 * * * *", async () => {
-    try {
-      const users = await User.find();
-      for (let user of users) {
-        console.log(
-          `SECTION SLINGSHOT: Cron running for user: ${user.terpmail}`
-        );
+  try {
+    const users = await User.find();
+    for (let user of users) {
+      console.log(`SECTION SLINGSHOT: Cron running for user: ${user.terpmail}`);
 
-        if (!user.slingshot_courses) continue;
+      if (!user.slingshot_courses) continue;
 
-        if (user.slingshot_courses.length > 0) {
-          for (let course of user.slingshot_courses) {
-            if (course.status != "Active") continue;
-            let updated = false;
+      if (user.slingshot_courses.length > 0) {
+        for (let course of user.slingshot_courses) {
+          if (course.status != "Active") continue;
+          let updated = false;
 
-            let { data } = await axios.get(
-              `https://schedule-of-classes-api.vercel.app/api/get-courses?name=${course.course_id}`
-            );
-
-            let c = data.find((c: any) => course.course_id == c.id);
-
-            if (!c || !c.sections) return;
-
-            let c_info = c.sections.find((section: Section) => {
-              return section.id == course.section.id;
-            });
-
-            if (c_info.open != 0) {
-              course.status = "Inactive (Email Sent Successfully)";
-
-              course.section.open = c_info.open;
-              updated = true;
-              user.markModified("slingshot_courses");
-
-              await sendEmail(
-                `${user.terpmail}`,
-                `[SECTION OPENED NOTIFICATION] Hey, ${user.username}! ${
-                  course.course_id
-                } - ${
-                  course.course_name
-                } Section ${course.section.id.toUpperCase()} has just opened!`,
-                html(
-                  `${course.course_name}`,
-                  `${course.course_id}`,
-                  `${course.section.id}`
-                )
-              );
-            } else {
-              console.log(
-                `SECTION SLINGSHOT: Nothing to be updated for user: ${user.username}`
-              );
-            }
-
-            if (updated) {
-              await user.save();
-              console.log(
-                `SECTION SLINGSHOT: SNIPED A CLOSED COURSE FOR: ${user.username}. EMAIL HAS BEEN SENT TO THEIR ACCOUNT!`
-              );
-            }
-          }
-        } else {
-          console.log(
-            `SECTION SLINGSHOT: Nothing to be updated for user: ${user.username}`
+          let { data } = await axios.get(
+            `https://schedule-of-classes-api.vercel.app/api/get-courses?name=${course.course_id}`
           );
+
+          let c = data.find((c: any) => course.course_id == c.id);
+
+          if (!c || !c.sections) return;
+
+          let c_info = c.sections.find((section: Section) => {
+            return section.id == course.section.id;
+          });
+
+          if (c_info.open != 0) {
+            course.status = "Inactive (Email Sent Successfully)";
+
+            course.section.open = c_info.open;
+            updated = true;
+            user.markModified("slingshot_courses");
+
+            await sendEmail(
+              `${user.terpmail}`,
+              `[SECTION OPENED NOTIFICATION] Hey, ${user.username}! ${
+                course.course_id
+              } - ${
+                course.course_name
+              } Section ${course.section.id.toUpperCase()} has just opened!`,
+              html(
+                `${course.course_name}`,
+                `${course.course_id}`,
+                `${course.section.id}`
+              )
+            );
+          } else {
+            console.log(
+              `SECTION SLINGSHOT: Nothing to be updated for user: ${user.username}`
+            );
+          }
+
+          if (updated) {
+            await user.save();
+            console.log(
+              `SECTION SLINGSHOT: SNIPED A CLOSED COURSE FOR: ${user.username}. EMAIL HAS BEEN SENT TO THEIR ACCOUNT!`
+            );
+          }
         }
+      } else {
+        console.log(
+          `SECTION SLINGSHOT: Nothing to be updated for user: ${user.username}`
+        );
       }
-    } catch (e: any) {
-      console.log(e.message);
     }
-  });
+  } catch (e: any) {
+    console.log(e.message);
+  }
 };
 
 export default slingshotUpdates;
