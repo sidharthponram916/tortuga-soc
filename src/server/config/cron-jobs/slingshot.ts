@@ -93,7 +93,7 @@ const slingshotUpdates = async () => {
           let updated = false;
 
           let { data } = await axios.get(
-            `https://schedule-of-classes-api.vercel.app/api/get-courses?name=${course.course_id}`
+            `/api/scraper/get-course-info?course=${course.course_id}`
           );
 
           let c = data.find((c: any) => course.course_id == c.id);

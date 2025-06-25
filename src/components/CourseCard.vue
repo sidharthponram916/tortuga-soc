@@ -391,13 +391,13 @@ export default {
 
       try {
         const [coursesRes, gpaRes] = await Promise.all([
-          axios.get(
-            `https://schedule-of-classes-api.vercel.app/api/get-courses?name=${name}`
-          ),
+          axios.get(`/api/scraper/get-course-info?course=${name}`),
           axios.get(`https://planetterp.com/api/v1/course?name=${name}`),
         ]);
 
         let data = coursesRes.data;
+
+        console.log(data);
 
         this.gpa = gpaRes.data.average_gpa;
 
