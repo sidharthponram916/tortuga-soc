@@ -14,6 +14,6 @@ export default defineEventHandler(async (event) => {
       return { statusCode: 200, message: "Cron successfully executed!" };
     }
   } catch (e) {
-    console.log({ statusCode: 500, message: "There was an error" });
+    return { statusCode: 500, message: e };
   }
 });
