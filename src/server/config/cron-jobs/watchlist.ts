@@ -1,4 +1,3 @@
-import cron from "node-cron";
 import User from "../../models/user.model";
 import sendEmail from "../send-email";
 import axios from "axios";
@@ -83,108 +82,106 @@ const html = (name: string, id: string, section_id: string) => {
 };
 
 const watchlistUpdates = async () => {
-  cron.schedule("*/1 * * * *", async () => {
-    try {
-      const users = await User.find();
-      for (let user of users) {
-        let toDeleteIndexes = [];
-        console.log(`COURSE WATCHER: Cron running for user ${user.username}`);
+  try {
+    const users = await User.find();
+    for (let user of users) {
+      let toDeleteIndexes = [];
+      console.log(`COURSE WATCHER: Cron running for user ${user.username}`);
 
-        if (!user.saved_courses) continue;
+      if (!user.saved_courses) continue;
 
-        if (user.saved_courses.length > 0) {
-          for (let course of user.saved_courses) {
-            let updated = false;
+      if (user.saved_courses.length > 0) {
+        for (let course of user.saved_courses) {
+          let updated = false;
 
-            let { data } = await axios.get(
-              `https://schedule-of-classes-api.vercel.app/api/get-courses?name=${course.course_id}`
+          let { data } = await axios.get(
+            `https://schedule-of-classes-api.vercel.app/api/get-courses?name=${course.course_id}`
+          );
+
+          let c = data.find((c: any) => course.course_id == c.id);
+
+          if (!c || !c.sections) continue;
+
+          let c_info = c.sections.find((section: Section) => {
+            return section.id == course.section.id;
+          });
+
+          if (c_info.open == 0) {
+            console.log(course.course_id + " just fell into case 1");
+
+            if (!user.slingshot_courses) continue;
+
+            course.section.open = c_info.open;
+
+            user.saved_courses = user.saved_courses.filter(
+              (c) =>
+                !(
+                  c.course_id === course.course_id &&
+                  c.section.id === course.section.id
+                )
             );
 
-            let c = data.find((c: any) => course.course_id == c.id);
+            course["status"] = "Active";
+            user.slingshot_courses.unshift(course);
 
-            if (!c || !c.sections) continue;
+            updated = true;
 
-            let c_info = c.sections.find((section: Section) => {
-              return section.id == course.section.id;
-            });
+            user.markModified("saved_courses");
+            user.markModified("slingshot_courses");
 
-            if (c_info.open == 0) {
-              console.log(course.course_id + " just fell into case 1");
+            await sendEmail(
+              `${user.terpmail}`,
+              `Course Closed! Hey, ${user.username}! ${course.course_id} - ${
+                course.course_name
+              } Section ${course.section.id.toUpperCase()} has closed.`,
+              html(course.course_name, course.course_id, course.section.id)
+            );
 
-              if (!user.slingshot_courses) continue;
+            console.log(
+              `COURSE WATCHER: ${
+                course.course_id
+              } - ${course.course_name.toUpperCase()} - ${
+                course.section.id
+              } just filled up! Transferred to SECTION SLINGSHOT!`
+            );
+          } else if (course.section.open != c_info.open) {
+            console.log(course.course_id + " just fell into case 2");
 
-              course.section.open = c_info.open;
+            course.section.open = c_info.open;
+            updated = true;
 
-              user.saved_courses = user.saved_courses.filter(
-                (c) =>
-                  !(
-                    c.course_id === course.course_id &&
-                    c.section.id === course.section.id
-                  )
-              );
-
-              course["status"] = "Active";
-              user.slingshot_courses.unshift(course);
-
-              updated = true;
-
-              user.markModified("saved_courses");
-              user.markModified("slingshot_courses");
-
-              await sendEmail(
-                `${user.terpmail}`,
-                `Course Closed! Hey, ${user.username}! ${course.course_id} - ${
-                  course.course_name
-                } Section ${course.section.id.toUpperCase()} has closed.`,
-                html(course.course_name, course.course_id, course.section.id)
-              );
-
-              console.log(
-                `COURSE WATCHER: ${
-                  course.course_id
-                } - ${course.course_name.toUpperCase()} - ${
-                  course.section.id
-                } just filled up! Transferred to SECTION SLINGSHOT!`
-              );
-            } else if (course.section.open != c_info.open) {
-              console.log(course.course_id + " just fell into case 2");
-
-              course.section.open = c_info.open;
-              updated = true;
-
-              user.markModified("saved_courses");
-              console.log(
-                `COURSE WATCHER: Change detected for ${
-                  course.course_id
-                } - ${course.course_name.toUpperCase()} - ${
-                  course.section.id
-                }. Updating database...`
-              );
-            } else {
-              console.log(
-                `COURSE WATCHER: Nothing to be updated for course: ${
-                  course.course_id
-                } - ${course.course_name.toUpperCase()} - ${course.section.id}`
-              );
-            }
-
-            if (updated) {
-              await user.save();
-              console.log(
-                `COURSE WATCHER: Database updated for user - ${user.username}`
-              );
-            }
+            user.markModified("saved_courses");
+            console.log(
+              `COURSE WATCHER: Change detected for ${
+                course.course_id
+              } - ${course.course_name.toUpperCase()} - ${
+                course.section.id
+              }. Updating database...`
+            );
+          } else {
+            console.log(
+              `COURSE WATCHER: Nothing to be updated for course: ${
+                course.course_id
+              } - ${course.course_name.toUpperCase()} - ${course.section.id}`
+            );
           }
-        } else {
-          console.log(
-            `COURSE WATCHER: Nothing to be updated for user - ${user.username}`
-          );
+
+          if (updated) {
+            await user.save();
+            console.log(
+              `COURSE WATCHER: Database updated for user - ${user.username}`
+            );
+          }
         }
+      } else {
+        console.log(
+          `COURSE WATCHER: Nothing to be updated for user - ${user.username}`
+        );
       }
-    } catch (e: any) {
-      console.log(e.message);
     }
-  });
+  } catch (e: any) {
+    console.log(e.message);
+  }
 };
 
 export default watchlistUpdates;
