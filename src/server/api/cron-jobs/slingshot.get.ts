@@ -10,7 +10,7 @@ export default defineEventHandler(async (event) => {
         statusMessage: "Unauthorized Request.",
       };
     } else {
-      slingshotUpdates();
+      await slingshotUpdates();
       return { statusCode: 200, message: "Cron successfully executed!" };
     }
   } catch (e) {

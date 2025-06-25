@@ -10,7 +10,7 @@ export default defineEventHandler(async (event) => {
         statusMessage: "Unauthorized Request.",
       };
     } else {
-      watchlistUpdates();
+      await watchlistUpdates();
       return { statusCode: 200, message: "Cron successfully executed!" };
     }
   } catch (e) {
