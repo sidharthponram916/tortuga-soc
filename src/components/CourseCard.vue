@@ -33,7 +33,7 @@
   </div>
   <div
     v-else-if="!loading && !error"
-    class="w-3/4 max-h-[83vh] overflow-y-auto border-r-2 border-y-2 border-slate-200"
+    class="w-3/4 max-h-[83vh] overflow-y-auto border-r-2 border-slate-200"
   >
     <div v-for="course in courses" :key="course.id" class="mb-16 p-4 m-4">
       <h1 class="text-5xl font-bold">{{ course.id }}</h1>
@@ -390,18 +390,24 @@ export default {
       this.error = false;
 
       try {
-        const [coursesRes, gpaRes] = await Promise.all([
+        const [coursesRes, gpaRes] = await Promise.allSettled([
           axios.get(`/api/scraper/get-course-info?course=${name}`),
           axios.get(`https://planetterp.com/api/v1/course?name=${name}`),
         ]);
 
-        let data = coursesRes.data;
+        if (coursesRes.status !== "fulfilled") {
+          this.error = true;
+          console.error("Failed to fetch course data:", coursesRes.reason);
+          return;
+        }
 
-        console.log(data);
+        let data = coursesRes.value.data;
 
-        this.gpa = gpaRes.data.average_gpa;
-
-        console.log(this.gpa);
+        if (gpaRes.status === "fulfilled" && gpaRes.value.data?.average_gpa) {
+          this.gpa = gpaRes.value.data.average_gpa;
+        } else {
+          this.gpa = null;
+        }
 
         if (data.length == 0) {
           this.error = true;

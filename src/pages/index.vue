@@ -32,14 +32,14 @@
           @keyup.enter="redirect"
           @input="filterSearch"
           v-model="terms"
-          class="w-full md:w-2/3 min-w-0 p-3 mt-6 bg-slate-100 text-slate-800 outline-none shadow-md"
+          class="w-full md:w-2/3 min-w-0 p-3 mt-6 bg-white text-slate-800 outline-none"
           placeholder="Enter a search term (eg. bmgt, cmsc320, fsoc)..."
         />
 
         <div class="overflow-y-auto h-32 w-full md:w-2/3 m-auto text-left">
           <div
             class="p-2 text-left bg-slate-100 border-b-2 border-slate-200 text-sm break-words whitespace-normal"
-            v-for="course in filteredResults.slice(0, 5)"
+            v-for="course in filteredResults.slice(0, 9)"
             :key="course.course_id"
           >
             <nuxt-link :to="'/classes/' + course.course_id">

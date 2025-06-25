@@ -1,7 +1,7 @@
 <template>
   <div>
     <transition name="fade">
-      <div class="m-2">
+      <div class="m-2 overflow-y-hidden">
         <div v-if="error">
           <div class="p-56 text-center m-2 text-3xl font-bold">
             <div class="text-8xl text-slate-500">404</div>
@@ -11,8 +11,8 @@
             </h1>
           </div>
         </div>
-        <div class="rounded mb-10">
-          <div class="flex">
+        <div class="rounded">
+          <div class="flex overflow-hidden">
             <div
               class="ml-auto w-1/4 bg-slate-50 p-10 border-b-2 border-slate-200"
             >
@@ -438,13 +438,11 @@
                 <option>Fall 2024</option>
               </select>
             </div>
-            <div
-              class="w-1/4 mt-3 bg-white border-b-2 border-slate-200"
-            >
-              <div class="text-center mt-1 border-slate-200 pb-2">
-                <b class="text-xl text-slate-500">{{
-                  filteredResults.length
-                }}</b>
+            <div class="w-1/4 bg-white border-b-2 border-r-2 border-slate-200">
+              <div
+                class="text-center mt-3 border-slate-200 text-slate-600 pb-2 font-medium"
+              >
+                <span>{{ filteredResults.length }}</span>
                 Results
               </div>
               <div class="h-[72vh] overflow-y-auto">
