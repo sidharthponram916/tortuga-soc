@@ -95,7 +95,7 @@ const watchlistUpdates = async () => {
           let updated = false;
 
           let { data } = await axios.get(
-            `http://tortugasoc.com/api/scraper/get-course-info?course=${course.course_id}`
+            `https://tortugasoc.com/api/scraper/get-course-info?course=${course.course_id}`
           );
 
           let c = data.find((c: any) => course.course_id == c.id);
