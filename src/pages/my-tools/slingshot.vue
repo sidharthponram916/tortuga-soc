@@ -1,10 +1,14 @@
 <template>
   <div class="p-10">
     <div class="mb-5">
-      <div class="w-3/4">
+      <div class="w-5/6">
         <div class="text-3xl font-bold">My Fall 2025 Slingshots</div>
         <div class="text-sm mt-1">
-          This is your list of current and inactive watches. If a course opens up from closure, you will receive a notification on email with a link to Testudo to register for the course immediately. 
+          This is your list of current and inactive watches. If a course opens
+          up from closure, you will receive a notification on email with a link
+          to Testudo to register for the course immediately.
+          <b> In some cases, Tortuga may send emails to your spam inbox. </b>
+          Please check to make sure and add Tortuga as a trusted sender.
         </div>
       </div>
     </div>

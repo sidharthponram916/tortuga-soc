@@ -7,6 +7,8 @@
           Keep an eye on your courses and alerts you via email if a course
           closes. It would then roll over to Section Slingshot and notify you if
           the course opens up again.
+          <b> In some cases, Tortuga may send emails to your spam inbox. </b>
+          Please check to make sure and add Tortuga as a trusted sender.
         </div>
       </div>
     </div>
