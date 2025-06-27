@@ -1,6 +1,6 @@
+import getCourseInfo from "~/server/api/scraper/get-course-info";
 import User from "../../models/user.model";
 import sendEmail from "../send-email";
-import axios from "axios";
 
 interface Section {
   id: string;
@@ -92,9 +92,7 @@ const slingshotUpdates = async () => {
           if (course.status != "Active") continue;
           let updated = false;
 
-          let { data } = await axios.get(
-            `https://tortugasoc.com/api/scraper/get-course-info?course=${course.course_id}`
-          );
+          let data = await getCourseInfo(course.course_id);
 
           let c = data.find((c: any) => course.course_id == c.id);
 
