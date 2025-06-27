@@ -96,7 +96,9 @@ const slingshotUpdates = async () => {
 
           let c = data.find((c: any) => course.course_id == c.id);
 
-          if (!c || !c.sections) return;
+          if (!c || !c.sections) {
+            continue; // ✅ Skip this course, continue with the rest
+          }
 
           let c_info = c.sections.find((section: Section) => {
             return section.id == course.section.id;
