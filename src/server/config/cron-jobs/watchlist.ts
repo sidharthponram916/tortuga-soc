@@ -90,7 +90,6 @@ const watchlistUpdates = async () => {
 
       if (!user.saved_courses) continue;
 
-      console.log(user.saved_courses);
       if (user.saved_courses.length > 0) {
         for (let course of user.saved_courses) {
           let updated = false;
