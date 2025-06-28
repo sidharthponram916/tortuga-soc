@@ -1,6 +1,6 @@
 import User from "../../models/user.model";
 import sendEmail from "../send-email";
-import getCourseInfo from "~/server/api/scraper/get-course-info";
+import { getCourseInfo } from "~/server/config/functions/getCourse";
 
 interface Section {
   id: string;
@@ -90,13 +90,14 @@ const watchlistUpdates = async () => {
 
       if (!user.saved_courses) continue;
 
+      console.log(user.saved_courses);
       if (user.saved_courses.length > 0) {
         for (let course of user.saved_courses) {
           let updated = false;
 
           let data = await getCourseInfo(course.course_id);
 
-          let c = data.find((c: any) => course.course_id == c.id);
+          let c = data.find((co: any) => course.course_id == co.id);
 
           if (!c || !c.sections) continue;
 
@@ -178,7 +179,8 @@ const watchlistUpdates = async () => {
       }
     }
   } catch (e: any) {
-    console.log("Error:" + e);
+    console.error("getCourseInfo error:", e);
+    throw e;
   }
 };
 

@@ -1,4 +1,4 @@
-import getCourseInfo from "~/server/api/scraper/get-course-info";
+import { getCourseInfo } from "~/server/config/functions/getCourse";
 import User from "../../models/user.model";
 import sendEmail from "../send-email";
 
@@ -97,7 +97,7 @@ const slingshotUpdates = async () => {
           let c = data.find((c: any) => course.course_id == c.id);
 
           if (!c || !c.sections) {
-            continue; 
+            continue;
           }
 
           let c_info = c.sections.find((section: Section) => {
