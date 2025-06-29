@@ -35,7 +35,7 @@ const html = (name: string, id: string, section: string) => {
       "
     >
       <img
-        src="https://static-00.iconduck.com/assets.00/turtle-emoji-1024x817-mtty96vf.png"
+        src="https://w7.pngwing.com/pngs/730/52/png-transparent-cute-turtle-thumbnail.png"
         style="
           display: block;
           margin: auto;
