@@ -9,7 +9,7 @@ interface Section {
 
 const html = (name: string, id: string, section: string) => {
   return ` <!DOCTYPE html>
-<html lang="en">a
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
