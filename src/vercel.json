@@ -1,0 +1,8 @@
+{
+  "crons": [
+    {
+      "path": "/server/api/cron-jobs/slingshot",
+      "schedule": "*/5 * * * *"
+    }
+  ]
+}
