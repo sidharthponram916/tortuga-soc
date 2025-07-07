@@ -4,7 +4,7 @@
   >
     <nuxt-link to="/" class="cursor-pointer">
       <span class="flex items-center space-x-3">
-        <img src="../assets/images/turtle.png" class="w-10 rounded-full" />
+        <img src="../public/tortugasoc.png" class="w-12 rounded-full" />
         <div class="hidden md:flex md:flex-col">
           <div class="text-xl font-bold text-slate-100">
             Tortuga <span class="text-sm text-red-400">v2.1</span>

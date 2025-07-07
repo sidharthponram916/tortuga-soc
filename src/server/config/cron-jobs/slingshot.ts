@@ -35,7 +35,7 @@ const html = (name: string, id: string, section: string) => {
       "
     >
       <img
-        src="https://w7.pngwing.com/pngs/730/52/png-transparent-cute-turtle-thumbnail.png"
+        src="https://tortugasoc.com/tortugasoc.png"
         style="
           display: block;
           margin: auto;
