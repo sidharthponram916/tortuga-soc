@@ -124,10 +124,6 @@ const slingshotUpdates = async () => {
                 `${course.section.id}`
               )
             );
-          } else {
-            console.log(
-              `SECTION SLINGSHOT: Nothing to be updated for user: ${user.username}`
-            );
           }
 
           if (updated) {

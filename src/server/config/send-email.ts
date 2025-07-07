@@ -12,7 +12,7 @@ const sendEmail = async function (
       secure: true, // true for port 465, false for other ports
       auth: {
         user: "tortugaumd@gmail.com",
-        pass: "xtfz qmth udfp vemm",
+        pass: "brpv nxib qbat umce",
       },
     });
 
