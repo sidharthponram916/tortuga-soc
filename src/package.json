@@ -12,6 +12,7 @@
   "dependencies": {
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "@fortawesome/vue-fontawesome": "^3.0.8",
+    "@google/genai": "^1.8.0",
     "@pinia/nuxt": "^0.10.1",
     "@tailwindcss/postcss": "^4.0.8",
     "@types/node-cron": "^3.0.11",
