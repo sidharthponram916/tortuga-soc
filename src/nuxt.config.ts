@@ -59,5 +59,14 @@ export default defineNuxtConfig({
     plugins: [tailwindcss()],
   },
 
-  modules: ["nuxt-gtag", "@pinia/nuxt"],
+  modules: [
+    "nuxt-gtag",
+    "@pinia/nuxt",
+    [
+      "@nuxtjs/google-adsense",
+      {
+        id: "ca-pub-6101040520579866",
+      },
+    ],
+  ],
 });
