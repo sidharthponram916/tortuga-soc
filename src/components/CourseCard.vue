@@ -279,6 +279,10 @@
                   </div>
                 </div>
               </div>
+              <div v-if="section.waitlist > 3" className="text-xs mt-3 italic w-full">
+                Note: {{ section.waitlist }} students are on the
+                waitlist for this course.
+              </div>
             </div>
             <div
               v-if="useAuthStore().user.user"
@@ -298,7 +302,7 @@
                         : "Available"
                     }}
                   </div>
-                  <div class="text-xs font-medium">
+                  <div class="relative group text-xs font-medium">
                     <b class="text-xs">{{ section.open }}</b> open,
                     <b class="text-xs">{{ section.total }}</b> seats
                   </div>
@@ -323,10 +327,10 @@
                 </div>
               </div>
             </div>
-            <div v-else class="flex flex-row ml-auto mb-auto w-1/7">
+            <div v-else class="flex flex-row ml-auto mb-auto w-1/4">
               <div
                 :class="defineColor(100 - 100 * (section.open / section.total))"
-                class="text-center w-full text-slate-800 p-2 text-base font-bold"
+                class="text-center w-full text-slate-800 p-2 text-base font-bold rounded-[10px]"
               >
                 <div>
                   {{
@@ -336,8 +340,8 @@
                   }}
                 </div>
                 <div class="text-sm font-medium">
-                  <b class="text-sm">{{ section.open }}</b> open,
-                  <b class="text-sm">{{ section.total }}</b> seats
+                  <b>{{ section.open }}</b> open,
+                  <b> {{ section.total }} </b> seats
                 </div>
               </div>
             </div>

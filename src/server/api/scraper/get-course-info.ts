@@ -64,6 +64,10 @@ export default defineEventHandler(async (event) => {
         const totalSeats =
           parseInt(section.find(".total-seats-count").text().trim()) || null;
 
+        const totalWaitlist =
+          parseInt(section.find(".waitlist-count").first().text().trim()) ||
+          parseInt(section.find(".waitlist-count").text().trim());
+
         const instructors: any = [];
         section.find(".section-instructor").each((_, i) => {
           instructors.push($(i).text().trim() || "N/A");
@@ -88,6 +92,7 @@ export default defineEventHandler(async (event) => {
           instructors,
           open: openSeats,
           total: totalSeats,
+          waitlist: totalWaitlist,
           days_info: daysInfo,
         });
       });
