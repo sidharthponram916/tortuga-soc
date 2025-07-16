@@ -279,9 +279,13 @@
                   </div>
                 </div>
               </div>
-              <div v-if="section.waitlist > 3" className="text-xs mt-3 italic w-full">
-                Note: {{ section.waitlist }} students are on the
-                waitlist for this course.
+              <div
+                v-if="section.waitlist > 3"
+                className="text-xs mt-3 italic w-full"
+              >
+                <font-awesome-icon class = "text-blue-800" :icon="['fas', 'circle-info']" />
+                {{ section.waitlist }} students are on the waitlist for this
+                course.
               </div>
             </div>
             <div
