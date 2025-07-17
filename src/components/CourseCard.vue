@@ -41,8 +41,8 @@
         {{ course.title }},
         <span class="font-medium"> {{ course.credits }} credits</span>
       </h1>
-      <div class="flex">
-        <span
+      <div class="flex relative group">
+        <div
           class="p-1 mx-1 mt-1 text-sm text-white font-semibold rounded"
           :class="defineGPAColor(gpa)"
           v-if="gpa"
@@ -57,7 +57,18 @@
           <span v-else-if="gpa >= 2.0"> C- </span>
 
           <span class="text-xs"> {{ gpa.toFixed(3) }} </span>
-        </span>
+        </div>
+        <div
+          v-if="gpa"
+          class="absolute top-full left-1/6 -translate-x-1/2 mt-2 hidden group-hover:block bg-black text-white text-xs rounded py-1 px-2 shadow-lg z-5 opacity-70"
+        >
+          <font-awesome-icon
+            class="text-slate-100"
+            :icon="['fas', 'circle-info']"
+          />
+          grades derived from planetterp.com
+        </div>
+
         <span
           v-for="flag in course.flags"
           :key="flag"
@@ -283,7 +294,10 @@
                 v-if="section.waitlist > 3"
                 className="text-xs mt-3 italic w-full"
               >
-                <font-awesome-icon class = "text-blue-800" :icon="['fas', 'circle-info']" />
+                <font-awesome-icon
+                  class="text-blue-800"
+                  :icon="['fas', 'circle-info']"
+                />
                 {{ section.waitlist }} students are on the waitlist for this
                 course.
               </div>

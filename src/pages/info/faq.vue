@@ -65,7 +65,7 @@ export default {
         {
           question: "How can I be able to work on Tortuga SOC as a developer?",
           answer:
-            "There have been plans with myself and a few other people to start an organization dedicated to making software for University of Maryland students. We will be recruiting student developers to work on a variety of projects, including Tortuga SOC. Stay tuned for more updates.",
+            "We have started an organization called TerpLabs that works on apps to improve UMD Student Life.",
         },
       ],
     };
