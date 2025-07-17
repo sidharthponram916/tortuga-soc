@@ -71,7 +71,7 @@ export default defineEventHandler(async (event) => {
       "
     >
       <img
-        src="https://static-00.iconduck.com/assets.00/turtle-emoji-1024x817-mtty96vf.png"
+        src="https://tortugasoc.com/tortugasoc.png"
         style="
           display: block;
           margin: auto;
