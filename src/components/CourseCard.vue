@@ -306,12 +306,12 @@
               v-if="useAuthStore().user.user"
               class="flex flex-row ml-auto mr-5 mb-auto bg-slate-500 w-1/4"
             >
-              <div class="hidden md:flex m-auto w-full flex-grid grid-rows-2">
+              <div class="sm:flex m-auto w-full flex-grid grid-rows-2">
                 <div
                   :class="
                     defineColor(100 - 100 * (section.open / section.total))
                   "
-                  class="text-center text-slate-800 p-2 text-xs font-bold w-5/6"
+                  class="text-center text-slate-800 p-2 text-xs font-bold sm:w-5/6"
                 >
                   <div>
                     {{
@@ -328,7 +328,7 @@
                 <div
                   :class="defineBookmarkColor(course.id, course.title, section)"
                   v-if="section.open > 0"
-                  class="text-center p-2 text-lg cursor-pointer font-bold items-center justify-center w-1/6"
+                  class="text-center p-2 text-lg cursor-pointer font-bold items-center justify-center sm:w-1/6"
                   @click="saveCourse(course.id, course.title, section)"
                 >
                   <font-awesome-icon :icon="['fas', 'bookmark']" />
@@ -338,7 +338,7 @@
                     defineSlingshotColor(course.id, course.title, section)
                   "
                   v-else
-                  class="text-center p-2 text-sm cursor-pointer font-bold items-center justify-center w-1/6"
+                  class="text-center p-2 text-sm cursor-pointer font-bold items-center justify-center sm:w-1/6"
                   @click="addToSlingshot(course.id, course.title, section)"
                 >
                   <font-awesome-icon :icon="['fas', 'crosshairs']" />

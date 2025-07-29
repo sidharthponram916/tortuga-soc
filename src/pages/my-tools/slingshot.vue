@@ -1,12 +1,13 @@
 <template>
   <div class="p-10">
     <div class="mb-5">
-      <div class="w-5/6">
+      <div class="sm:w-5/6 text-center sm:text-left">
         <div class="text-3xl font-bold">My Fall 2025 Slingshots</div>
-        <div class="text-sm mt-1">
-          This is your list of current and inactive watches. If a course opens
-          up from closure, you will receive a notification on email with a link
-          to Testudo to register for the course immediately.
+        <div class="text-sm sm:text-xs mt-1">
+          To add a class to your slingshot, search a class above and select the
+          target next to the section. If a course opens up from closure, you
+          will receive a notification on email with a link to Testudo to
+          register for the course immediately.
           <b> In some cases, Tortuga may send emails to your spam inbox. </b>
           Please check to make sure and add Tortuga as a trusted sender.
         </div>
@@ -95,14 +96,14 @@
           </div>
         </div>
         <div class="flex flex-row ml-auto mb-auto bg-slate-500 w-1/5">
-          <div class="m-auto w-full flex flex-grid grid-rows-2">
+          <div class="m-auto w-full sm:flex flex-grid grid-rows-2">
             <div
               :class="
                 defineColor(
                   100 - 100 * (course.section.open / course.section.total)
                 )
               "
-              class="text-center text-slate-800 p-2 text-base font-bold w-6/7"
+              class="text-center text-slate-800 sm:p-2 text-sm sm:text-base font-bold sm:w-6/7"
             >
               <div>
                 {{
@@ -113,13 +114,13 @@
                     : "Available"
                 }}
               </div>
-              <div class="text-sm font-medium">
+              <div class="hidden sm:block text-xs sm:text-sm font-medium">
                 <b class="text-sm">{{ course.section.open }}</b> open,
                 <b class="text-sm">{{ course.section.total }}</b> seats
               </div>
             </div>
             <div
-              class="text-center p-2 text-lg text-white cursor-pointer font-bold items-center justify-center w-1/7"
+              class="text-center p-1 sm:p-2 text-sm sm:text-lg text-white cursor-pointer font-bold items-center justify-center sm:w-1/7"
               @click="
                 saveCourse(course.course_id, course.course_name, course.section)
               "
