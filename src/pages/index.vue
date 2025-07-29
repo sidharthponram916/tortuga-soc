@@ -1,11 +1,13 @@
 <template>
-  <div class="h-screen bg-yellow-500 flex flex-col items-center p-4">
+  <div class="min-h-screen bg-yellow-500 flex flex-col items-center p-4">
     <div class="text-center pt-16 text-slate-900 font-bold">
       <img
         src="../assets/images/turtle-shell.svg"
         class="mb-6 mt-6 w-24 h-24 md:w-32 md:h-32 m-auto"
       />
-      <div class="text-3xl md:hidden">Welcome to Tortuga!</div>
+      <div class="text-5xl text-center sm:hidden">
+        Streamlining the Schedule of Classes at UMD.
+      </div>
       <!-- Make text visible on mobile -->
       <div class="hidden md:block text-3xl md:text-4xl mt-4">
         {{ displayedText }}
@@ -15,7 +17,9 @@
       </div>
 
       <!-- Stack items on mobile, space them well -->
-      <div class="flex flex-wrap justify-center items-center mt-10 gap-3">
+      <div
+        class="flex flex-wrap justify-center items-center mt-10 gap-2 sm:gap-3"
+      >
         <div v-for="flag in flags" :key="flag">
           <nuxt-link :to="'/general-education/classes/' + flag">
             <div
@@ -26,7 +30,7 @@
           </nuxt-link>
         </div>
       </div>
-      <div class="m-auto w-full">
+      <div class="mt-10 sm:mt-0 m-auto w-full">
         <input
           type="text"
           @keyup.enter="redirect"
@@ -36,7 +40,9 @@
           placeholder="Enter a search term (eg. bmgt, cmsc320, fsoc)..."
         />
 
-        <div class="overflow-y-auto h-32 w-full md:w-2/3 m-auto text-left">
+        <div
+          class="overflow-y-auto sm:h-32 sm:w-full md:w-2/3 m-auto text-left"
+        >
           <div
             class="p-2 text-left bg-slate-100 border-b-2 border-slate-200 text-sm break-words whitespace-normal"
             v-for="course in filteredResults.slice(0, 9)"
@@ -64,6 +70,7 @@ export default {
     return {
       text: "Streamlining the Schedule of Classes at UMD. ",
       displayedText: "",
+      isInputFocused: "",
       index: 0,
       courses: [],
       terms: "",
@@ -328,13 +335,19 @@ export default {
       this.index = 0;
 
       const interval = setInterval(() => {
+        if (this.isInputFocused) {
+          clearInterval(interval);
+          return;
+        }
+
         if (this.index < this.text.length) {
           this.displayedText += this.text[this.index];
           this.index++;
         } else {
           clearInterval(interval);
-
-          setTimeout(this.startTypingEffect, 5000);
+          setTimeout(() => {
+            if (!this.isInputFocused) this.startTypingEffect();
+          }, 5000);
         }
       }, 50);
     },

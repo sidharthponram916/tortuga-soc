@@ -33,7 +33,7 @@
   </div>
   <div
     v-else-if="!loading && !error"
-    class="w-3/4 max-h-[83vh] overflow-y-auto border-r-2 border-slate-200"
+    class="sm:w-3/4 max-h-[83vh] overflow-y-auto border-r-2 border-slate-200"
   >
     <div v-for="course in courses" :key="course.id" class="mb-16 p-4 m-4">
       <h1 class="text-5xl font-bold">{{ course.id }}</h1>

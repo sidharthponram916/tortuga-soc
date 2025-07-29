@@ -14,7 +14,7 @@
         <div class="rounded">
           <div class="flex overflow-hidden">
             <div
-              class="ml-auto w-1/4 bg-slate-50 p-10 border-b-2 border-slate-200"
+              class="hidden sm:block ml-auto w-1/4 bg-slate-50 p-10 border-b-2 border-slate-200"
             >
               <div class="mb-5 text-2xl font-bold">Filters</div>
               <div
@@ -438,7 +438,9 @@
                 <option>Fall 2024</option>
               </select>
             </div>
-            <div class="w-1/4 bg-white border-b-2 border-r-2 border-slate-200">
+            <div
+              class="hidden sm:block w-full sm:w-1/4 bg-white border-b-2 border-r-2 border-slate-200"
+            >
               <div
                 class="text-center mt-3 border-slate-200 text-slate-600 pb-2 font-medium"
               >

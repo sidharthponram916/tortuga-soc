@@ -16,7 +16,9 @@
       <div class="font-bold mt-5">Information We Collect</div>
       We collect the following types of personal information from users:
       <br />
-      <div class="mt-5 font-medium text-slate-600">School Email Address (Terpmail)</div>
+      <div class="mt-5 font-medium text-slate-600">
+        School Email Address (Terpmail)
+      </div>
       <div class="font-medium text-slate-600">Phone Number (optional)</div>
       <div class="font-bold mt-5">How We Use Your Information</div>
       We use the information collected for the following purposes: To provide
@@ -25,8 +27,8 @@
       obligations. To enhance user experience and website performance using
       analytics.
       <div class="font-bold mt-5">Tracking & Analytics</div>
-      We use third-party analytics tools to track and analyze website usages, specifically
-      Google Analytics. These tools help us understand how users
+      We use third-party analytics tools to track and analyze website usages,
+      specifically Google Analytics. These tools help us understand how users
       interact with our Website and improve our services. For more information
       on Google Analytics, please visit:
       <a
