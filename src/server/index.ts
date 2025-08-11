@@ -17,7 +17,7 @@ export default async (_nitroApp: Nitro) => {
     // slingshotUpdates();
     amazonUpdates();
     
-    console.log("Connected to database server!");
+    console.log("Connected to bruh server!");
   } catch (e) {
     console.error(e);
   }
