@@ -55,6 +55,75 @@
           </div>
         </div>
       </div>
+      <!-- <div class="flex grid grid-cols-3 gap-5">
+        <div
+          class="text-2xl mb-10 text-white justify-center bg-white m-auto rounded-[10px]"
+        >
+          <div>
+            <div class="pt-10 text-slate-700">
+              Get notified instantly of any seat openings with Section
+              Slingshot.
+            </div>
+            <img src="../assets/images/sample.png" class="w-1/2 m-auto mt-10" />
+          </div>
+        </div>
+        <div
+          class="text-2xl mb-10 text-black justify-center bg-slate-200 m-auto rounded-[10px]"
+        >
+          <div>
+            <div class="pt-10">Search for classes in a smarter way.</div>
+            <img
+              src="../assets/images/sample2.png"
+              class="w-full m-auto mt-10"
+            />
+          </div>
+        </div>
+        <div
+          class="text-2xl mb-10 text-white justify-center bg-white m-auto rounded-[10px]"
+        >
+          <div>
+            <div class="pt-10 text-slate-700">
+              Get notified instantly of any seat openings with Section
+              Slingshot.
+            </div>
+            <img src="../assets/images/sample.png" class="w-1/2 m-auto mt-10" />
+          </div>
+        </div>
+      </div>
+      <div
+        class="text-4xl text-white mb-5 flex m-auto items-center justify-center"
+      >
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Maryland_Terrapins_logo.svg/1200px-Maryland_Terrapins_logo.svg.png"
+          class="w-10 mr-3"
+        />
+        Used by 500+ students on campus.
+      </div>
+      <div class="flex grid grid-cols-3 gap-5 w-11/12 m-auto mb-10">
+        <div
+          class="bg-yellow-400 mt-5 p-4 italic font-medium rounded text-center"
+        >
+          "...the absolute goat!! this [section slingshot] got me into conway's
+          section that someone just dropped"
+
+          <div class="mt-4"><b>Clark Engineering Student @ UMD</b></div>
+        </div>
+        <div
+          class="bg-yellow-400 mt-5 p-4 italic font-medium rounded text-center"
+        >
+          "I always have an issue with Testudo where I’ll get a “bad request”
+          screen whenever I try to access class listings just to reset my cache
+          and have it show up again. Will start using this :)"
+          <div class="mt-4"><b>r/UMD</b></div>
+        </div>
+        <div
+          class="bg-yellow-400 mt-5 p-4 italic font-medium rounded text-center"
+        >
+          "I’ve looked through Tortuga as a prospective freshman and this looks
+          so much better and easier to use!"
+          <div class="mt-4"><b>r/UMD</b></div>
+        </div>
+      </div> -->
     </div>
   </div>
 </template>
