@@ -1,10 +1,10 @@
 import slingshotUpdates from "~/server/config/cron-jobs/slingshot";
 
 export default defineEventHandler(async (event) => {
-  const authHeader = getRequestHeader(event, "Authorization");
+  const apiKey = getHeader(event, "x-api-key");
 
   try {
-    if (!authHeader || authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
+    if (apiKey !== useRuntimeConfig().eventbridgeURI) {
       return {
         statusCode: 401,
         statusMessage: "Unauthorized Request.",
