@@ -7,7 +7,7 @@ export default defineEventHandler(async (event) => {
     if (apiKey !== useRuntimeConfig().eventbridgeURI) {
       return {
         statusCode: 401,
-        statusMessage: "Unauthorized Request.",
+        statusMessage: "Unauthorized Request Made.",
       };
     } else {
       await slingshotUpdates();
