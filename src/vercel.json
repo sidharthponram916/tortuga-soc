@@ -1,9 +1,8 @@
 {
-    "crons": [
-      {
-        "path": "/api/cron-jobs/slingshot",
-        "schedule": "31 * * * *"
-      }
-    ]
-  }
-  
+  "crons": [
+    {
+      "path": "/api/cron-jobs/slingshot",
+      "schedule": "31 * * * *"
+    }
+  ]
+}
