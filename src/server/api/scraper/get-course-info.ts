@@ -6,7 +6,7 @@ export default defineEventHandler(async (event) => {
     const query = getQuery(event);
 
     const { data } = await axios.get(
-      `https://app.testudo.umd.edu/soc/search?courseId=${query.course}&sectionId=&termId=202508&_openSectionsOnly=on&creditCompare=&credits=&courseLevelFilter=ALL&instructor=&_facetoface=on&_blended=on&_online=on&courseStartCompare=&courseStartHour=&courseStartMin=&courseStartAM=&courseEndHour=&courseEndMin=&courseEndAM=&teachingCenter=ALL&_classDay1=on&_classDay2=on&_classDay3=on&_classDay4=on&_classDay5=on`
+      `https://app.testudo.umd.edu/soc/search?courseId=${query.course}&sectionId=&termId=202601&_openSectionsOnly=on&creditCompare=&credits=&courseLevelFilter=ALL&instructor=&_facetoface=on&_blended=on&_online=on&courseStartCompare=&courseStartHour=&courseStartMin=&courseStartAM=&courseEndHour=&courseEndMin=&courseEndAM=&teachingCenter=ALL&_classDay1=on&_classDay2=on&_classDay3=on&_classDay4=on&_classDay5=on`
     );
 
     const $ = cheerio.load(data);

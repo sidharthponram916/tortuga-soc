@@ -60,7 +60,7 @@ export default {
         {
           question: "When will the rest of the features be finished?",
           answer:
-            "Ideally the rest of the website will be finished by Fall 2025, including Degree Planner and Schedule Builder.",
+            "Ideally the rest of the website will be finished by Spring 2026, including Degree Planner and Schedule Builder.",
         },
         {
           question: "How can I be able to work on Tortuga SOC as a developer?",

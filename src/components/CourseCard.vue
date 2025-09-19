@@ -105,7 +105,7 @@
         <div class="p-1 mt-5 text-xl font-bold text-slate-700">Sections</div>
         <div class="p-1 text-sm">
           Below is a list of course sections offered in
-          <b>Fall 2025</b>. If an instructor has a rating, it will be displayed.
+          <b>Spring 2026</b>. If an instructor has a rating, it will be displayed.
           Clicking on the rating will take you to the instructor's page on
           PlanetTerp for more details.
         </div>

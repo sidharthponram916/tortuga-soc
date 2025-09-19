@@ -2,7 +2,7 @@
   <div class="p-10">
     <div class="mb-5">
       <div class="w-3/4">
-        <div class="text-3xl font-bold">My Fall 2025 Watchlist</div>
+        <div class="text-3xl font-bold">My Spring 2026 Watchlist</div>
         <div class="text-sm mt-1">
           Keep an eye on your courses and alerts you via email if a course
           closes. It would then roll over to Section Slingshot and notify you if

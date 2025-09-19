@@ -2,7 +2,7 @@
   <div class="p-10">
     <div class="mb-5">
       <div class="sm:w-5/6 text-center sm:text-left">
-        <div class="text-3xl font-bold">My Fall 2025 Slingshots</div>
+        <div class="text-3xl font-bold">My Spring 2026 Slingshots</div>
         <div class="text-sm sm:text-xs mt-1">
           To add a class to your slingshot, search a class above and select the
           target next to the section. If a course opens up from closure, you

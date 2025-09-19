@@ -432,6 +432,7 @@
                 class="p-2 border-2 border-slate-200 w-full bg-white outline-none text-sm mt-2 disabled:bg-gray-100"
                 disabled
               >
+                <option>Spring 2026</option>
                 <option>Fall 2025</option>
                 <option>Summer 2025</option>
                 <option>Spring 2025</option>

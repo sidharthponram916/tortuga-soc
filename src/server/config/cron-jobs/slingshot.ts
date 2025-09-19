@@ -62,7 +62,7 @@ const html = (name: string, id: string, section: string) => {
       </div>
       <div style="padding: 30px">
         <a
-          href="https://app.testudo.umd.edu/#/main/dropAdd?null&termId=202508"
+          href="https://app.testudo.umd.edu/#/main/dropAdd?null&termId=202601"
           style="
             padding: 10px;
             margin: 100px;
