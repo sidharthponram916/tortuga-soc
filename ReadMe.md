@@ -1,5 +1,5 @@
 # Tortuga - Enhanced Schedule of Classes
-Tortuga is an alternative course catalog that has an enhanced UI and feature-rich compabilities compared to [Testudo](https://app.testudo.umd.edu/soc), University of Maryland's existing SOC platform. Tortuga provides faster lookups including an all-in-one interface as well as a notification systems where students can track and get notified of any class openings. 
+Tortuga is a modern alternative to the University of Maryland’s Testudo course catalog, built to make class planning faster and more intuitive. With its sleek, enhanced interface and powerful search capabilities, Tortuga simplifies the course selection process into a single, all-in-one experience. Students can browse courses effortlessly and subscribe to real-time notifications that alert them the moment a seat opens, ensuring they never miss an opportunity to enroll in the classes they need.
 
 <img width="1465" height="747" alt="Screenshot 2025-10-01 at 9 15 17 PM" src="https://github.com/user-attachments/assets/f44643ab-bd3e-461d-9010-fb2cdf1ac369" />
 
