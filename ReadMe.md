@@ -4,7 +4,6 @@
 ## Premise 
 Tortuga is an alternative course catalog that has an enhanced UI and feature-rich compabilities compared to [Testudo](https://app.testudo.umd.edu/soc), University of Maryland's official schedule of classes. Tortuga provides faster lookups including an all-in-one interface as well as a notification systems where students can track and get notified of any class openings. 
 
-Data gathered from Google Analytics. 
 ## Technologies 
 
 ### Frontend Development 
