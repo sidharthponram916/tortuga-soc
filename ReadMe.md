@@ -11,10 +11,10 @@ Tortuga is an alternative course catalog that has an enhanced UI and feature-ric
 ## Technologies 
 
 ### Frontend Development 
-- I used `Nuxt.js` and `TailwindCSS` to build all components of the application 
-- I also utlized `FontAwesome Icons` throughout the app to contribute to a clean user experience. 
+- Built all UI components using Nuxt.js and TailwindCSS for a fast and responsive interface.
+- Incorporated FontAwesome Icons to maintain a modern and consistent user experience.
 
 ### Backend Development 
-- I used `TypeScript` to write my backend scripts and `MongoDB` to store all user data and notification caches.
-- The web scraper (in a different repository) that gathers data from [Testudo](https://app.testudo.umd.edu/soc) is built with `Python`, `FastAPI`, & `BeautifulSoup`.
-- The email notification pipeline is built with `TypeScript` and deployed on `AWS Eventbridge` 
+- Developed backend scripts in TypeScript and managed data persistence with MongoDB for storing user data and notification caches.
+- Created a separate web scraper that collects course data from Testudo, leveraging Python, FastAPI, and BeautifulSoup.
+- Designed and deployed the email notification pipeline using TypeScript and AWS EventBridge to automate alert delivery.
