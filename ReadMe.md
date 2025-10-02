@@ -16,5 +16,5 @@ Tortuga is an alternative course catalog that has an enhanced UI and feature-ric
 
 ### Backend Development 
 - Developed backend scripts in TypeScript and managed data persistence with MongoDB for storing user data and notification caches.
-- Created a separate web scraper that collects course data from Testudo, leveraging Python, FastAPI, and BeautifulSoup.
+- Created a [separate web scraper](https://github.com/sidharthponram916/schedule-of-classes-api) that collects course data from Testudo, leveraging Python, FastAPI, and BeautifulSoup.
 - Designed and deployed the email notification pipeline using TypeScript and AWS EventBridge to automate alert delivery.
