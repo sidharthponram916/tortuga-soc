@@ -15,7 +15,8 @@ Data gathered from Google Analytics.
 ## Technologies 
 
 ### Frontend Development 
-I used `Nuxt.js` and `TailwindCSS`, and also used `FontAwesome Icons` throughout the app to contribute to a clean user experience. 
+- I used `Nuxt.js` and `TailwindCSS` to build all components of the application 
+- I also utlized `FontAwesome Icons` throughout the app to contribute to a clean user experience. 
 
 ### Backend Development 
 - I used `TypeScript` to write my backend scripts and `MongoDB` to store all user data and notification caches.
