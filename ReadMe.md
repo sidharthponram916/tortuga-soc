@@ -11,6 +11,7 @@ Tortuga is an alternative course catalog that has an enhanced UI and feature-ric
 ### `512` course availability notifications sent
 ### `131` total registered users 
 
+Data gathered from Google Analytics. 
 ## Technologies 
 
 ### Frontend Development 
