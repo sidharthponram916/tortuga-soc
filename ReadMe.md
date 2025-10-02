@@ -5,10 +5,10 @@
 
 ## Spring 2025 Cycle Statistics (March 1st 2025 - May 15th 2025) 
 
-`29,933` Site Views
-`3,176` total unique users 
-`512` course availability notifications sent
-`131` total registered users 
+### `29,933` Site Views
+### `3,176` total unique users 
+### `512` course availability notifications sent
+### `131` total registered users 
 
 ## Technologies 
 
