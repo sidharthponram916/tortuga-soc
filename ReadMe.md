@@ -18,4 +18,6 @@ Data gathered from Google Analytics.
 I used `Nuxt.js` and `TailwindCSS`, and also used `FontAwesome Icons` throughout the app to contribute to a clean user experience. 
 
 ### Backend Development 
-I used `TypeScript` to write my backend scripts and `MongoDB` to store all user data and notification caches. The web scraper (in a different repository) that gathers data from [Testudo](https://app.testudo.umd.edu/soc) is built with `Python`, `FastAPI`, & `BeautifulSoup`.  
+- I used `TypeScript` to write my backend scripts and `MongoDB` to store all user data and notification caches.
+- The web scraper (in a different repository) that gathers data from [Testudo](https://app.testudo.umd.edu/soc) is built with `Python`, `FastAPI`, & `BeautifulSoup`.
+- The email notification pipeline is built with `TypeScript` and deployed on `AWS Eventbridge` 
