@@ -104,6 +104,13 @@ const slingshotUpdates = async () => {
             return section.id == course.section.id;
           });
 
+          if (!c_info) {
+            console.log(
+              `SECTION SLINGSHOT: Section not found for ${user.terpmail} course=${course.course_id} section=${course.section?.id}`
+            );
+            continue;
+          }
+
           if (c_info.open != 0) {
             course.status = "Inactive (Email Sent Successfully)";
 
