@@ -1,4 +1,4 @@
-import nodemailer from "nodemailer";
+import { createMailTransport, MAIL_USER } from "~/server/config/mailer";
 
 const sendEmail = async function (
   email: string,
@@ -6,18 +6,10 @@ const sendEmail = async function (
   text: string
 ) {
   try {
-    const transporter = nodemailer.createTransport({
-      host: "smtp.gmail.com",
-      port: 465,
-      secure: true, // true for port 465, false for other ports
-      auth: {
-        user: "tortugaumd@gmail.com",
-        pass: "brpv nxib qbat umce",
-      },
-    });
+    const transporter = createMailTransport();
 
     await transporter.sendMail({
-      from: "'Tortuga UMD' <tortugaumd@gmail.com>",
+      from: `'Tortuga UMD' <${MAIL_USER}>`,
       to: `${email}`,
       subject: `${subject}`,
       html: `${text}`,

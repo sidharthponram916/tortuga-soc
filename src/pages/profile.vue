@@ -43,6 +43,24 @@
       <div class="text-center">
         <select
           class="p-2 m-2 bg-white w-11/12 rounded outline-none border-2 border-slate-400 focus:border-2 focus:border-yellow-500"
+          v-model="user.carrier"
+        >
+          <option value="">Mobile carrier (required for texts)</option>
+          <option value="verizon">Verizon</option>
+          <option value="att">AT&amp;T</option>
+          <option value="tmobile">T-Mobile</option>
+          <option value="sprint">Sprint</option>
+          <option value="boost">Boost Mobile</option>
+          <option value="cricket">Cricket</option>
+          <option value="uscellular">US Cellular</option>
+          <option value="metropcs">Metro by T-Mobile</option>
+          <option value="googlefi">Google Fi</option>
+          <option value="virgin">Virgin Mobile</option>
+        </select>
+      </div>
+      <div class="text-center">
+        <select
+          class="p-2 m-2 bg-white w-11/12 rounded outline-none border-2 border-slate-400 focus:border-2 focus:border-yellow-500"
           v-model="user.standing"
         >
           <option value="2024">Enter Graduation Year</option>
@@ -119,6 +137,7 @@ export default {
         major: "",
         standing: "2024",
         telephone: "",
+        carrier: "",
       },
       message: "",
     };

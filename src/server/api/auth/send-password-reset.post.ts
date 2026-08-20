@@ -25,6 +25,14 @@ export default defineEventHandler(async (event) => {
           "No valid phone number is on file for this account. Add one in your profile before requesting an SMS reset.",
       };
 
+    // The free email-to-SMS gateway needs the user's carrier.
+    if (!user.carrier)
+      return {
+        statusCode: 400,
+        message:
+          "No mobile carrier is on file for this account. Set your carrier in your profile before requesting an SMS reset.",
+      };
+
     const existingToken = await EmailToken.findOne({ userId: user.id });
 
     if (existingToken)
@@ -43,7 +51,7 @@ export default defineEventHandler(async (event) => {
       useRuntimeConfig().frontendURL
     }${link}`;
 
-    await sendSMS(phone, message);
+    await sendSMS(phone, message, user.carrier);
 
     return { statusCode: 200, message: "Reset text sent!" };
   } catch (e: any) {

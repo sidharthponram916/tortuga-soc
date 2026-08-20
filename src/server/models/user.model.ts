@@ -17,6 +17,12 @@ const userSchema = new Schema({
     type: String,
     default: "",
   },
+  carrier: {
+    // Mobile carrier key (verizon, att, tmobile, ...) for the free
+    // email-to-SMS gateway. See server/config/send-sms.ts.
+    type: String,
+    default: "",
+  },
   standing: {
     type: String,
     required: false,
