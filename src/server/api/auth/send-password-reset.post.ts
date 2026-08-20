@@ -1,7 +1,8 @@
 import User from "~/server/models/user.model";
 import EmailToken from "~/server/models/email-token.model";
 import { v4 as uuidv4 } from "uuid";
-import sendEmail from "~/server/config/send-email";
+import sendSMS from "~/server/config/send-sms";
+import normalizePhone from "~/server/config/normalize-phone";
 
 export default defineEventHandler(async (event) => {
   try {
@@ -15,12 +16,21 @@ export default defineEventHandler(async (event) => {
         message: "That user is not associated with a Tortuga Account.",
       };
 
+    // SMS reset requires a phone number on file.
+    const phone = normalizePhone(user.telephone || "");
+    if (!phone)
+      return {
+        statusCode: 400,
+        message:
+          "No valid phone number is on file for this account. Add one in your profile before requesting an SMS reset.",
+      };
+
     const existingToken = await EmailToken.findOne({ userId: user.id });
 
     if (existingToken)
       return {
         statusCode: 401,
-        message: "A password reset email has already been sent!",
+        message: "A password reset text has already been sent!",
       };
 
     const token = await EmailToken.create({
@@ -29,78 +39,14 @@ export default defineEventHandler(async (event) => {
     });
 
     const link = `/auth/${user._id}/password-reset/${token.token}`;
-    const html = `<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
-    <title>Hello World</title>
-  </head>
-  <body
-    style="
-      text-align: center;
-      background-color: #f0b942;
-      color: rgb(59, 59, 59);
-      font-family: Roboto, sans-serif;
-    "
-  >
-    <div
-      style="
-        padding: 8px;
-        margin: 8px auto;
-        width: 50%;
-        background-color: #790c0c;
-        color: #ececec;
-        text-align: center;
-      "
-    >
-      <img
-        src="https://static-00.iconduck.com/assets.00/turtle-emoji-1024x817-mtty96vf.png"
-        style="
-          display: block;
-          margin: auto;
-          width: 10rem;
-          padding-top: 5rem;
-          padding-bottom: 3rem;
-        "
-      />
-      <div style="font-weight: bold; font-size: 1.875rem; color: white;">
-        Reset your Password. 
-      </div>
-      <div
-        style="
-          font-weight: 500;
-          font-size: 1.25rem;
-          padding: 5px;
-          width: 83.3333%;
-          margin: auto;
-          color: white;
-        "
-      >
-        Click on the link below to set a new secure password for your account.
-      </div>
-      <div style="padding: 30px">
-        <a
-          href="${useRuntimeConfig().frontendURL}${link}"
-          style="
-            padding: 10px;
-            margin: 100px;
-            font-weight: bold;
-            border-radius: 5px;
-            color: white;
-            text-align: center; 
-          "
-        >
-        Reset password. 
-        </a>
-      </div>
-    </div>
-  </body>
-</html>`;
+    const message = `Tortuga: reset your password using this link (expires in 1 hour): ${
+      useRuntimeConfig().frontendURL
+    }${link}`;
 
-    sendEmail(`${body.terpmail}`, `Reset your password.`, html);
+    await sendSMS(phone, message);
+
+    return { statusCode: 200, message: "Reset text sent!" };
   } catch (e: any) {
-    return { statusCode: 500, message: e };
+    return { statusCode: 500, message: e.message || e };
   }
 });

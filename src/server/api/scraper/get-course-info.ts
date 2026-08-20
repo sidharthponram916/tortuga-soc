@@ -5,8 +5,13 @@ export default defineEventHandler(async (event) => {
   try {
     const query = getQuery(event);
 
+    // Default keeps existing behavior (open sections only). Pass openOnly=false
+    // to include closed sections too (used by the schedule builder for Slingshot).
+    const openSectionsParam =
+      query.openOnly === "false" ? "" : "_openSectionsOnly=on&";
+
     const { data } = await axios.get(
-      `https://app.testudo.umd.edu/soc/search?courseId=${query.course}&sectionId=&termId=202608&_openSectionsOnly=on&creditCompare=&credits=&courseLevelFilter=ALL&instructor=&_facetoface=on&_blended=on&_online=on&courseStartCompare=&courseStartHour=&courseStartMin=&courseStartAM=&courseEndHour=&courseEndMin=&courseEndAM=&teachingCenter=ALL&_classDay1=on&_classDay2=on&_classDay3=on&_classDay4=on&_classDay5=on`
+      `https://app.testudo.umd.edu/soc/search?courseId=${query.course}&sectionId=&termId=202608&${openSectionsParam}creditCompare=&credits=&courseLevelFilter=ALL&instructor=&_facetoface=on&_blended=on&_online=on&courseStartCompare=&courseStartHour=&courseStartMin=&courseStartAM=&courseEndHour=&courseEndMin=&courseEndAM=&teachingCenter=ALL&_classDay1=on&_classDay2=on&_classDay3=on&_classDay4=on&_classDay5=on`
     );
 
     const $ = cheerio.load(data);

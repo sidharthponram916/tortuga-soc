@@ -18,7 +18,7 @@
           @click="sendPasswordReset"
           class="p-2 m-2 bg-red-700 cursor-pointer font-semibold w-11/12 rounded text-white mt-5"
         >
-          Send Reset Email
+          Send Reset Text
         </button>
         <a href="/auth/sign-in">
           <button

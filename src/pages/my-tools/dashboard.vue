@@ -47,18 +47,19 @@
             </div>
           </div>
         </nuxt-link>
-        <div
-          class="p-4 m-4 sm:bg-slate-300 text-2xl font-semibold rounded sm:w-1/3"
+        <nuxt-link
+          to="/my-tools/schedule-builder"
+          class="p-4 m-4 sm:bg-slate-100 hover:bg-slate-200 text-2xl rounded font-semibold sm:w-1/3"
         >
           <div class="text-center text-8xl mb-3">
             <font-awesome-icon :icon="['fas', 'book']" />
           </div>
           <div class="text-center">Schedule Builder</div>
           <div class="text-center text-sm font-light mt-2">
-            Autogenerate an effective schedule, catered to your needs.
-            <span class="text-xs"> (coming soon) </span>
+            Search courses, add sections, and see your week laid out with
+            conflict detection.
           </div>
-        </div>
+        </nuxt-link>
       </div>
     </div>
   </div>

@@ -33,6 +33,14 @@
         />
       </div>
       <div class="text-center">
+        <input
+          type="tel"
+          class="p-2 m-2 bg-white w-11/12 rounded outline-none border-2 border-slate-400 focus:border-2 focus:border-yellow-500"
+          placeholder="Phone number (for SMS notifications)"
+          v-model="user.telephone"
+        />
+      </div>
+      <div class="text-center">
         <select
           class="p-2 m-2 bg-white w-11/12 rounded outline-none border-2 border-slate-400 focus:border-2 focus:border-yellow-500"
           v-model="user.standing"
@@ -110,6 +118,7 @@ export default {
         registration_time: "",
         major: "",
         standing: "2024",
+        telephone: "",
       },
       message: "",
     };
