@@ -1,117 +1,78 @@
-import { GoogleGenAI, Type } from "@google/genai";
 import { getCourseInfo } from "~/server/config/functions/getCourse";
-import { performance } from "perf_hooks";
+import {
+  generateSchedules,
+  parseSection,
+  parseTime,
+  DAYS,
+} from "~/utils/scheduler";
 
-const ai = new GoogleGenAI({});
+// GET /api/scraper/generate-schedule?courses=CMSC250,MATH240,CMSC216
+//   optional: earliest=9:00am  latest=5:00pm  daysOff=F,M  openOnly=false
+//             limit=10
+// Returns conflict-free schedules (one section per course), best first.
+
+// Each course is a separate Testudo request, so keep this bounded
+const MAX_COURSES = 10;
 
 export default defineEventHandler(async (event) => {
   try {
-    const courses = ["CMSC250", "MATH240", "CMSC216"];
-    let coursesJSON = [];
+    const query = getQuery(event);
+    const ids = String(query.courses || "")
+      .split(",")
+      .map((c) => c.trim().toUpperCase())
+      .filter(Boolean);
 
-    for (let course of courses) {
-      let courseJSON = await getCourseInfo(`${course}`);
-      let result = courseJSON[0]; 
-      result = {
-        id: result.id,
-        sections: result.sections.filter(
-          (section: any) => section.open > 0
-        ),
-      };
-
-
-      coursesJSON.push(result);
+    if (!ids.length) {
+      return { message: "Provide courses, e.g. ?courses=CMSC216,MATH240" };
+    }
+    if (ids.length > MAX_COURSES) {
+      return { message: `Provide at most ${MAX_COURSES} courses.` };
+    }
+    if (ids.some((id) => !/^[A-Z]{4}\d{3}[A-Z]?$/.test(id))) {
+      return { message: "Course codes look like CMSC216." };
     }
 
-    console.log(coursesJSON);
-    console.log("Generating a schedule!");
+    const courses = await Promise.all(
+      ids.map(async (id) => {
+        const data = await getCourseInfo(id);
+        const match = Array.isArray(data)
+          ? data.find((c: any) => c.id === id)
+          : null;
+        return {
+          id,
+          sections: match
+            ? match.sections.map((s: any) => parseSection(id, s))
+            : [],
+        };
+      })
+    );
 
-    const start = performance.now();
-    const response: any = await ai.models.generateContent({
-      model: "gemini-2.5-flash",
-      contents: `You are given a list of real university course sections in the JSON array below.
-      
-      Your task:
-      1. Pick **exactly one section from each course**.
-      2. Make sure that **none of the selected sections have overlapping times**.
-      3. Only select from the provided JSON. Do NOT invent, assume, or modify any values. Do not create new sections or instructors.
-      4. Only include the selected sections in the final JSON response — nothing else.
-      
-      Return ONLY the selected sections as a JSON array, using the exact format shown in the input.
-      
-      Here is the data (JSON):
-      ${JSON.stringify(coursesJSON)}
-      `,
-      config: {
-        responseMimeType: "application/json",
-        responseSchema: {
-          type: Type.ARRAY,
-          items: {
-            type: Type.OBJECT,
-            properties: {
-              id: {
-                type: Type.STRING,
-              },
-              instructors: {
-                type: Type.ARRAY,
-                items: {
-                  type: Type.STRING,
-                },
-              },
-              open: {
-                type: Type.NUMBER, // Or Type.INTEGER if you prefer
-              },
-              total: {
-                type: Type.NUMBER, // Or Type.INTEGER
-              },
-              days_info: {
-                type: Type.ARRAY,
-                items: {
-                  type: Type.OBJECT,
-                  properties: {
-                    days: {
-                      type: Type.STRING,
-                    },
-                    start_time: {
-                      type: Type.STRING,
-                    },
-                    end_time: {
-                      type: Type.STRING,
-                    },
-                    building: {
-                      type: Type.STRING,
-                    },
-                    room: {
-                      type: Type.STRING,
-                    },
-                    message: {
-                      type: Type.STRING,
-                    },
-                    class_type: {
-                      type: Type.STRING,
-                    },
-                  },
-                },
-              },
-            },
-            propertyOrdering: [
-              "id",
-              "instructors",
-              "open",
-              "total",
-              "days_info",
-            ],
-          },
+    const result = generateSchedules(
+      courses,
+      {
+        earliest: parseTime(String(query.earliest || "")) ?? 0,
+        latest: parseTime(String(query.latest || "")) ?? 24 * 60,
+        daysOff: String(query.daysOff || "")
+          .split(",")
+          .map((d) => DAYS.indexOf(d.trim()))
+          .filter((d) => d >= 0),
+        openOnly: query.openOnly !== "false",
+        excluded: {},
+        pinned: {},
+        weights: {
+          compact: 2,
+          fewerDays: 1,
+          lateStart: 1,
+          earlyEnd: 0,
+          professors: 0,
         },
       },
-    });
-    const end = performance.now();
-    console.log(`⏱️ Gemini API call took ${(end - start).toFixed(2)} ms`);
+      {},
+      { limit: Math.min(parseInt(String(query.limit)) || 10, 100) }
+    );
 
-    console.log(response.text);
-
-    return JSON.parse(response.text);
+    return result;
   } catch (e) {
-    return { message: "Failed to retrieve page." };
+    return { message: "Failed to generate schedules." };
   }
 });

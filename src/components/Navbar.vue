@@ -22,6 +22,9 @@
     <nuxt-link to="/my-tools/slingshot" class="hidden md:block ml-10 text-xs">
       <b class="text-base">Section Slingshot</b></nuxt-link
     >
+    <nuxt-link class="hidden md:block ml-10" to="/scheduler">
+      <b>Scheduler</b>
+    </nuxt-link>
     <nuxt-link class="hidden md:block ml-10" to="/info/faq">
       <b>FAQ</b>
     </nuxt-link>
